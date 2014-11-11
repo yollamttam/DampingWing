@@ -1,0 +1,38 @@
+Files like
+z517.spec.tex
+
+File name here gives the emission redshift of the quasar, e.g., z_em=5.17
+in the above example.
+First column is log10(wavelength), second column is Flux in some units.
+
+Corresponding files named
+z517.var.tex give the noise array:
+First column is log10(wavelength), second column is inverse variance, in
+same units as "spec.tex" file.
+
+Files like
+z582_hres.spec.tex
+z582_hres.var.tex
+
+are similar, except first column is wavelength (angstroms), rather than
+log10(wavelength). Second column is flux, but in different units than above.
+Here the ".var.tex" files give the noise sigma, rather than the inverse variance.
+
+Files like Q0836-spec.tex have columns
+with wavelength in angstroms, and flux.
+Those with names like Q0836-noise.tex are the corresponding error arrays.
+Here the columns in the error array files are wavelength and sigma_flux.
+
+The following table gives the emission redshift of the quasars in this case
+(from Fan, Strauss, et al. 0512082):
+
+Q0836+0054 z_em=5.82
+Q1306+0356 z_em=5.99
+
+Finally, the files "qso_z_628_lo_res.txt" and "qso_z_637_lo_res.txt"
+have columns with log10(wavelength) and flux, with z_em=6.28, 6.37 respectively.
+The corresponding noise arrays are in "noise_z_xxx_lo_res.txt', and
+have log10(wavelength), sigma_flux columns.
+
+File LBQS.lis is the LBQS quasar composite, which can be used to set the unabsorbed quasar 
+continuum. The first column is rest frame wavelength. The second column is flux in some units.

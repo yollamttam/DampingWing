@@ -1,0 +1,17 @@
+import os
+import numpy as np
+
+
+def plotSpectra(sFilename,z):
+    print sFilename
+    lambdaA = 1216*(1+z)
+    lambdaB = 1026*(1+z)
+    lambdaG = 972*(1+z)
+    c = 3e5
+
+    data = np.genfromtxt(sFilename)
+
+    #check if we already know how to handle this file
+    fileBase, fileExt = os.path.splitext(filename)
+    knownFormatFile ="%s_method.%s" % (fileBase, fileExt)
+    knownFormat = os.path.isfile(
