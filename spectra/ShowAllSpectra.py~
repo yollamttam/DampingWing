@@ -1,0 +1,27 @@
+import os
+import numpy as np
+import matplotlib.pylab as plt
+import ShowSpectra
+
+nspectra = 20;
+
+f1 = 'Q0836-spec.tex'
+f2 = 'Q1306-spec.tex'
+f3 = 'qso_z_628_lo_res.txt'
+f4 = 'qso_z_637_lo_res.txt'
+f5 = 'z517.spec.tex'
+f6 = 'z521.spec.tex'
+f7 = 'z530.spec.tex'
+f8 = 'z531.spec.tex'
+f9 = 'z541.spec.tex'
+f10 = 'z574.tex'
+f11 = 'z580.tex'
+f12 = 'z582_hres.spec.tex'
+f13 = 'z582.tex'
+f14 = 'z595.tex'
+f15 = 'z599_hres.spec.tex'
+f16 = 'z599.tex'
+f17 = 'z605.tex'
+f18 = 'z607.tex'
+f19 = 'z614.tex'
+f20 = 'z621.tex'
