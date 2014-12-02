@@ -104,19 +104,6 @@ def getFilenamesAndRedshiftsWithNoise():
 
     return f,nf,z
 
-def smoothSpectra(flux,n):
-    #we want to just smooth this in a natural way and we are 
-    #frustrated after looking to Google for help
-    
-    maxIndex = len(flux)-n
-    for i in range(n,maxIndex):
-        flux[i] = np.mean(flux[i-n:i+n])
-    
-    #take care of edges
-    flux[0:n] = np.mean(flux[0:n])
-    flux[-n::] = np.mean(flux[-n::])
-
-    return flux
 
 def plotSpectra(sFilename,nFilename,z):
     print sFilename
