@@ -104,19 +104,6 @@ def getFilenamesAndRedshiftsWithNoise():
 
     return f,nf,z
 
-def smoothSpectra(flux,n):
-    #we want to just smooth this in a natural way and we are 
-    #frustrated after looking to Google for help
-    
-    maxIndex = len(flux)-n
-    for i in range(n,maxIndex):
-        flux[i] = np.mean(flux[i-n:i+n])
-    
-    #take care of edges
-    flux[0:n] = np.mean(flux[0:n])
-    flux[-n::] = np.mean(flux[-n::])
-
-    return flux
 
 def plotSpectra(sFilename,nFilename,z):
     print sFilename
@@ -240,11 +227,14 @@ def plotSpectra(sFilename,nFilename,z):
         smin = tmin*(1+z)
         smax = tmax*(1+z)
         sMean = np.mean(flux[(lambdas>smin)&(lambdas<smax)])
-            
+        sVar = np.var(flux[(lambdas>smin)&(lambdas<smax)])
+        
         tAdjust = sMean/tMean
         tFlux = tFlux*tAdjust
         tLambdas = tLambdas*(1+z)
         
+        snrEstimate = sMean*1.0/np.sqrt(sVar)
+
         #plot both together
         plt.figure()
         plt.plot(tLambdas,tFlux)
@@ -277,10 +267,12 @@ def plotSpectra(sFilename,nFilename,z):
     ### and then save in some common format.
 
     #We would also like to include the noise in all of this...
-    ndata = np.genfromtxt(nFilename)
-    nlambdas = ndata[0,:]
-    nsigmas = ndata[1,:]
-    
+    if (nFilename != 0):
+        ndata = np.genfromtxt(nFilename)
+        nlambdas = ndata[0,:]
+        nsigmas = ndata[1,:]
+    else:
+        nlambdas = lambdas
     #ok, so first we actually need to get the lambda range
     LAmin = 1050*(1+z)
     LAmax = 1190*(1+z)
@@ -288,7 +280,10 @@ def plotSpectra(sFilename,nFilename,z):
     LBmax = 1020*(1+z)
 
     f = sp.interp1d(tLambdas,tFlux)
-    nf = sp.interp1d(nlambdas,nsigmas)
+    if (nFilename != 0):
+        nf = sp.interp1d(nlambdas,nsigmas)
+    else:
+        nf = f
     LAs = lambdas[(lambdas>LAmin)&(lambdas<LAmax)]
     LBs = lambdas[(lambdas>LBmin)&(lambdas<LBmax)]
     FAs = flux[(lambdas>LAmin)&(lambdas<LAmax)]
@@ -305,6 +300,10 @@ def plotSpectra(sFilename,nFilename,z):
     plt.plot(zAs,Atran)
     plt.plot(zBs,Btran)
     
+    snrFile = "%s_snrEstimate%s" % (fileBase, fileExt)
+    outfile = open(snrFile,'w')
+    outfile.write("%f"%(snrEstimate))
+    outfile.close()
     
     print "Considering file %s" %(sFilename)
     ncol = np.shape(data)[1]
@@ -313,25 +312,39 @@ def plotSpectra(sFilename,nFilename,z):
     outputFileB ="%s_LybMatrix%s" % (fileBase, fileExt)
     doneAlready = os.path.isfile(outputFileA)
     
-    if (doneAlready != 1):
+    print np.shape(snrEstimate*np.ones(np.shape(Atran))),np.shape(Atran)
+    if (nFilename == 0):
+        Asigs = snrEstimate*np.ones(np.shape(Atran))
+        Bsigs = snrEstimate*np.ones(np.shape(Btran))
 
+    if (doneAlready != 1):
+        
         print np.shape(zAs),np.shape(Atran),np.shape(Asigs)
         LyaMatrix = np.vstack((zAs,Atran,Asigs))
         LybMatrix = np.vstack((zBs,Btran,Bsigs))
         print np.shape(LyaMatrix),np.shape(LybMatrix)
         np.savetxt(outputFileA, LyaMatrix, delimiter="\t")
         np.savetxt(outputFileB, LybMatrix, delimiter="\t")
-
+            
     return vs,flux
 
 
 
 
 if __name__ == "__main__":
-    f,nf,z = getFilenamesAndRedshiftsWithNoise()
+    noNoise = 1
+    if noNoise:
+        f,z = getFilenamesAndRedshifts()
+    else:
+        f,nf,z = getFilenamesAndRedshiftsWithNoise()
+        nf = 0
     nSpectra = len(f)
     for i in range(0,nSpectra):
-        plotSpectra(f[i],nf[i],z[i])
+        if (noNoise != 1):
+            inputNF = nf[i]
+        else:
+            inputNF = 0
+        plotSpectra(f[i],inputNF,z[i])
 
         
 
