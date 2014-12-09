@@ -284,6 +284,7 @@ def plotSpectra(sFilename,nFilename,z):
         nf = sp.interp1d(nlambdas,nsigmas)
     else:
         nf = f
+    
     LAs = lambdas[(lambdas>LAmin)&(lambdas<LAmax)]
     LBs = lambdas[(lambdas>LBmin)&(lambdas<LBmax)]
     FAs = flux[(lambdas>LAmin)&(lambdas<LAmax)]
@@ -295,7 +296,7 @@ def plotSpectra(sFilename,nFilename,z):
     Bsigs = f(LBs)/nf(LBs)
     zAs = allzA[(lambdas>LAmin)&(lambdas<LAmax)]
     zBs = allzB[(lambdas>LBmin)&(lambdas<LBmax)]
-
+    
     plt.figure()
     plt.plot(zAs,Atran)
     plt.plot(zBs,Btran)

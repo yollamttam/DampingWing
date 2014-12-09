@@ -118,9 +118,61 @@ def getAllFilenames():
 
     return f,fbase,z
 
+
+def findMeanF(zarray,counts,fluxes,mFilename):
+
+    mdata = np.genfromtxt(mFilename)
+    zs = mdata[0,:]
+    flux = np.copy(mdata[1,:])
+
+    dz = np.abs(zarray[1]-zarray[0])
+    minz = np.min(zs)
+    maxz = np.max(zs)
+    nz = np.size(zarray)
+    for i in range(0,nz):
+        if ((minz < zarray[i])&(maxz>zarray[i])):
+            meanf = np.mean(flux[(zs>zarray[i])&(zs<(zarray[i]+dz))])
+            fluxes[i] = fluxes[i] + meanf
+            counts[i] = counts[i] + 1
+            
+    return fluxes,counts
+
+def FvsZ():
+    f,fbase,z = getAllFilenames()
+    nSpectra = len(f)
+    
+    zmin = 4.36248913251 
+    zmax = 6.21088364792
+    dz = .25
+    epsilon = 1e-10
+    zarray = np.arange(zmin,zmax+dz,dz)
+    counts = np.zeros(np.shape(zarray))+epsilon
+    fluxes = np.zeros(np.shape(zarray))
+    for i in range(0,nSpectra):
+        if (i != 4):
+            fluxes,counts = findMeanF(zarray,counts,fluxes,f[i])
+            
+    fluxes = fluxes/counts
+    zarray = zarray + dz/2
+    plt.plot(zarray[fluxes>0],fluxes[fluxes>0])
+    plt.xlabel('z')
+    plt.ylabel('<F>')
+    plt.title('Mean Transmission vs. Z (First Pass)')
+    plt.show(block=False)
+    input("Press Enter to end program...")
+
+
 def zDistributionOne(mFilename):
     mdata = np.genfromtxt(mFilename)
     zs = np.copy(mdata[0,:])
+
+    #we need to put this on some kind of uniform grid
+    minz = np.min(zs)
+    maxz = np.max(zs)
+    dz = .001
+    newzs = np.arange(minz,maxz+dz,dz)
+
+    
     return zs
 
 def zDistributionFull():
@@ -137,8 +189,11 @@ def zDistributionFull():
     plt.hist(z,50)
     plt.xlabel('z')
     plt.ylabel('Frequency')
+    plt.title('Z Histogram without Binning Spectra')
     plt.show(block=False)
-    print "you should really be binning specta before doing this..."
+    
+    print np.min(z),np.max(z)
+
     input("Press return to end program")
             
             
@@ -213,9 +268,9 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
     largeStackP = nullValue*np.ones(np.shape(vgrid))
     largeStackM = nullValue*np.ones(np.shape(vgrid))
     fluxlength = np.size(flux)
-    #plt.plot(vs,sflux)
-    #plt.xlabel('v (km/s)')
-    #plt.ylabel('F(v)')
+    plt.plot(vs,sflux)
+    plt.xlabel('v (km/s)')
+    plt.ylabel('F_{unsmoothed}(v)')
     for i in range(0,fluxlength):
         if (sflux[i] == 0):
             darkGap = darkGap + 1
@@ -244,7 +299,7 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
                         ps = sp.interp1d(vstack,plus)
                         plusgrid = ps(vgrid)
                         largeStackP = np.vstack((largeStackP,plusgrid))
-                    #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
+                        plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
                     #plt.show(block=False)
                 #negative stack
                 mini = darkIndex - nrange - 1
@@ -262,7 +317,7 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
                         ms = sp.interp1d(vstack,minus)
                         minusgrid = ms(vgrid)
                         largeStackM = np.vstack((largeStackM,minusgrid))
-                    #plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
+                        plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
                     #plt.show(block=False)
                     
                 
@@ -286,7 +341,7 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
                         ps = sp.interp1d(vstack,plus)
                         plusgrid = ps(vgrid)
                         smallStackP = np.vstack((smallStackP,plusgrid))
-                    #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
+                        plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
                     #plt.show(block=False)
                     
 
@@ -305,14 +360,17 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
                         ms = sp.interp1d(vstack,minus)
                         minusgrid = ms(vgrid)
                         smallStackM = np.vstack((smallStackM,minusgrid))
-                    #plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]),'--')
+                        plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]),'--')
                     #plt.show(block=False)
                     
                     
             darkGap = 0
             darkIndex = darkIndexReset
-    #input("Flux and all stacking locations...")
-    #plt.close()
+
+    plt.axis([np.min(vs),np.max(vs),-0.1,1.2])
+    plt.show(block=False)
+    input("Flux and all stacking locations...")
+    plt.close()
     
     print "%s contributed %d stacks..." % (mFilename,stackCount)
     return largeStackP,largeStackM,smallStackP,smallStackM,meansnr
@@ -495,12 +553,11 @@ def fullStack(lmin,lmax,zcut):
 
     return vs,large,small
 
-
-if __name__ == "__main__":
-
+def StackVaryL():
+    
     lmin = np.array([100,300,500,1000])
     lmax = 300
-    zcut = -5
+    zcut = 2
     for i in range(0,np.size(lmin)):
         vs,large,small = fullStack(lmin[i],lmax,zcut)
         if (i == 0):
@@ -519,3 +576,6 @@ if __name__ == "__main__":
         plt.show(block=False)
     input("Press return to end...")
 
+if __name__ == "__main__":
+
+    fullStack(500,500,1)
