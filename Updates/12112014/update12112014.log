@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  9 DEC 2014 17:21
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  10 DEC 2014 15:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -251,7 +251,58 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 3.
 Package hyperref Warning: Option `pdftex' has already been used,
 (hyperref)                setting the option has no effect on input line 3.
 
-) (./update12112014.aux
+) (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2008/08/13 v2.6a package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks21
+\XKV@tempa@toks=\toks22
+\XKV@depth=\count110
+File: xkeyval.tex 2008/08/13 v2.6a key=value parser (HA)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+(/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box28
+)
+\tc@llx=\dimen117
+\tc@lly=\dimen118
+\tc@urx=\dimen119
+\tc@ury=\dimen120
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen121
+\adjbox@Height=\dimen122
+\adjbox@Depth=\dimen123
+\adjbox@Totalheight=\dimen124
+
+(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2011/09/13 v1.0 Conditionals for odd/even page detection
+\c@checkoddpage=\count111
+)
+(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box29
+\sift@deathcycles=\count112
+\@vwid@loff=\dimen125
+\@vwid@roff=\dimen126
+))
+(./update12112014.aux
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
 
 LaTeX Warning: Label `fig:todo' multiply defined.
 
@@ -264,33 +315,33 @@ LaTeX Warning: Label `fig:todo' multiply defined.
 )
 \openout1 = `update12112014.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 3.
-LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
-\scratchdimen=\dimen117
-\scratchbox=\box28
-\nofMPsegments=\count111
-\nofMParguments=\count112
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count113
-\MPscratchDim=\dimen118
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
-\everyMPtoPDFconversion=\toks22
+\scratchcounter=\count113
+\scratchdimen=\dimen127
+\scratchbox=\box30
+\nofMPsegments=\count114
+\nofMParguments=\count115
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count116
+\MPscratchDim=\dimen128
+\MPnumerator=\count117
+\makeMPintoPDFobject=\count118
+\everyMPtoPDFconversion=\toks24
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -306,7 +357,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box29
+\AtBeginShipoutBox=\box31
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
@@ -316,7 +367,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-Package hyperref Info: Link coloring ON on input line 3.
+Package hyperref Info: Link coloring ON on input line 4.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -324,11 +375,11 @@ Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count116
+\c@section@level=\count119
 )
-LaTeX Info: Redefining \ref on input line 3.
-LaTeX Info: Redefining \pageref on input line 3.
-LaTeX Info: Redefining \nameref on input line 3.
+LaTeX Info: Redefining \ref on input line 4.
+LaTeX Info: Redefining \pageref on input line 4.
+LaTeX Info: Redefining \nameref on input line 4.
 
 (./update12112014.out) (./update12112014.out)
 \@outlinefile=\write3
@@ -339,21 +390,21 @@ LaTeX Info: Redefining \nameref on input line 3.
 File: Stack_Zlessthan5p5.png Graphic file (type png)
 
 <use Stack_Zlessthan5p5.png>
-Package pdftex.def Info: Stack_Zlessthan5p5.png used on input line 9.
+Package pdftex.def Info: Stack_Zlessthan5p5.png used on input line 10.
 (pdftex.def)             Requested size: 199.16928pt x 150.10747pt.
 
-<Stack_Zgreaterthan5p5.png, id=6, 586.8324pt x 442.2924pt>
+<Stack_Zgreaterthan5p5.png, id=6, 604.1772pt x 377.2494pt>
 File: Stack_Zgreaterthan5p5.png Graphic file (type png)
 
 <use Stack_Zgreaterthan5p5.png>
-Package pdftex.def Info: Stack_Zgreaterthan5p5.png used on input line 10.
-(pdftex.def)             Requested size: 199.16928pt x 150.10747pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 11.
+Package pdftex.def Info: Stack_Zgreaterthan5p5.png used on input line 11.
+(pdftex.def)             Requested size: 199.16928pt x 124.36029pt.
+LaTeX Font Info:    Try loading font information for U+msa on input line 12.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 11.
+LaTeX Font Info:    Try loading font information for U+msb on input line 12.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -362,26 +413,26 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 File: Stack_Zlessthan5.png Graphic file (type png)
 
 <use Stack_Zlessthan5.png>
-Package pdftex.def Info: Stack_Zlessthan5.png used on input line 17.
+Package pdftex.def Info: Stack_Zlessthan5.png used on input line 18.
 (pdftex.def)             Requested size: 199.16928pt x 150.10747pt.
 
 <Stack_Zgreaterthan5.png, id=8, 586.8324pt x 442.2924pt>
 File: Stack_Zgreaterthan5.png Graphic file (type png)
 
 <use Stack_Zgreaterthan5.png>
-Package pdftex.def Info: Stack_Zgreaterthan5.png used on input line 18.
+Package pdftex.def Info: Stack_Zgreaterthan5.png used on input line 19.
 (pdftex.def)             Requested size: 199.16928pt x 150.10747pt.
 
 <zHist_binned.png, id=13, 586.8324pt x 442.2924pt>
 File: zHist_binned.png Graphic file (type png)
  <use zHist_binned.png>
-Package pdftex.def Info: zHist_binned.png used on input line 25.
+Package pdftex.def Info: zHist_binned.png used on input line 26.
 (pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
 
 <zHist_unbinned.png, id=14, 586.8324pt x 442.2924pt>
 File: zHist_unbinned.png Graphic file (type png)
  <use zHist_unbinned.png>
-Package pdftex.def Info: zHist_unbinned.png used on input line 26.
+Package pdftex.def Info: zHist_unbinned.png used on input line 27.
 (pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
 
 
@@ -390,56 +441,160 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <FvsZ.png, id=15, 586.8324pt x 442.2924pt>
 File: FvsZ.png Graphic file (type png)
  <use FvsZ.png>
-Package pdftex.def Info: FvsZ.png used on input line 33.
+Package pdftex.def Info: FvsZ.png used on input line 34.
 (pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Stack_SanityCut.png, id=16, 586.8324pt x 442.2924pt>
+<sflux_panel1.png, id=16, 1476.4761pt x 294.1389pt>
+File: sflux_panel1.png Graphic file (type png)
+ <use sflux_panel1.png>
+Package pdftex.def Info: sflux_panel1.png used on input line 42.
+(pdftex.def)             Requested size: 512.1496pt x 102.03006pt.
+
+<flux_panel1.png, id=17, 1486.5939pt x 326.6604pt>
+File: flux_panel1.png Graphic file (type png)
+ <use flux_panel1.png>
+Package pdftex.def Info: flux_panel1.png used on input line 43.
+(pdftex.def)             Requested size: 512.1496pt x 112.53845pt.
+
+<sflux_panel2.png, id=18, 1486.5939pt x 326.6604pt>
+File: sflux_panel2.png Graphic file (type png)
+ <use sflux_panel2.png>
+Package pdftex.def Info: sflux_panel2.png used on input line 44.
+(pdftex.def)             Requested size: 512.1496pt x 112.53845pt.
+
+<flux_panel2.png, id=19, 1486.5939pt x 326.6604pt>
+File: flux_panel2.png Graphic file (type png)
+ <use flux_panel2.png>
+Package pdftex.def Info: flux_panel2.png used on input line 45.
+(pdftex.def)             Requested size: 512.1496pt x 112.53845pt.
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 42--46
+ [][] 
+ []
+
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 42--46
+ [] 
+ []
+
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 42--46
+ [] 
+ []
+
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 42--46
+ [] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<sflux_panel3.png, id=20, 1489.4847pt x 326.6604pt>
+File: sflux_panel3.png Graphic file (type png)
+ <use sflux_panel3.png>
+Package pdftex.def Info: sflux_panel3.png used on input line 52.
+(pdftex.def)             Requested size: 512.1496pt x 112.31914pt.
+
+<flux_panel3.png, id=21, 1485.8712pt x 301.3659pt>
+File: flux_panel3.png Graphic file (type png)
+ <use flux_panel3.png>
+Package pdftex.def Info: flux_panel3.png used on input line 53.
+(pdftex.def)             Requested size: 512.1496pt x 103.87477pt.
+
+<sflux_panel4.png, id=22, 1486.5939pt x 327.3831pt>
+File: sflux_panel4.png Graphic file (type png)
+ <use sflux_panel4.png>
+Package pdftex.def Info: sflux_panel4.png used on input line 54.
+(pdftex.def)             Requested size: 512.1496pt x 112.78743pt.
+
+<flux_panel4.png, id=23, 1469.2491pt x 301.3659pt>
+File: flux_panel4.png Graphic file (type png)
+ <use flux_panel4.png>
+Package pdftex.def Info: flux_panel4.png used on input line 55.
+(pdftex.def)             Requested size: 512.1496pt x 105.05199pt.
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 52--56
+ [][] 
+ []
+
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 52--56
+ [] 
+ []
+
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 52--56
+ [] 
+ []
+
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 52--56
+ [] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<gridPlot.png, id=24, 1734.48pt x 875.9124pt>
+File: gridPlot.png Graphic file (type png)
+ <use gridPlot.png>
+Package pdftex.def Info: gridPlot.png used on input line 62.
+(pdftex.def)             Requested size: 512.1496pt x 258.63249pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Stack_SanityCut.png, id=25, 586.8324pt x 442.2924pt>
 File: Stack_SanityCut.png Graphic file (type png)
 
 <use Stack_SanityCut.png>
-Package pdftex.def Info: Stack_SanityCut.png used on input line 41.
+Package pdftex.def Info: Stack_SanityCut.png used on input line 70.
 (pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
 
-<Stack_SanityCutCorrect.png, id=17, 586.8324pt x 442.2924pt>
+<Stack_SanityCutCorrect.png, id=26, 586.8324pt x 442.2924pt>
 File: Stack_SanityCutCorrect.png Graphic file (type png)
 
 <use Stack_SanityCutCorrect.png>
-Package pdftex.def Info: Stack_SanityCutCorrect.png used on input line 42.
+Package pdftex.def Info: Stack_SanityCutCorrect.png used on input line 71.
 (pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 48.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 78.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Stack_Zlessthan5p5.png> 
 <./Stack_Zgreaterthan5p5.png> <./Stack_Zlessthan5.png> <./Stack_Zgreaterthan5.p
-ng>] [2 <./zHist_binned.png> <./zHist_unbinned.png> <./FvsZ.png>] [3 <./Stack_S
-anityCut.png> <./Stack_SanityCutCorrect.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 48.
+ng>] [2 <./zHist_binned.png> <./zHist_unbinned.png> <./FvsZ.png>] [3 <./sflux_p
+anel1.png> <./flux_panel1.png> <./sflux_panel2.png> <./flux_panel2.png>]
+[4 <./sflux_panel3.png> <./flux_panel3.png> <./sflux_panel4.png> <./flux_panel4
+.png>] [5 <./gridPlot.png> <./Stack_SanityCut.png> <./Stack_SanityCutCorrect.pn
+g>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 78.
  (./update12112014.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 48.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 48.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 78.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 78.
 Package rerunfilecheck Info: File `update12112014.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 48.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 78.
  ) 
 Here is how much of TeX's memory you used:
- 6012 strings out of 495059
- 85913 string characters out of 3182030
- 164126 words of memory out of 3000000
- 9119 multiletter control sequences out of 15000+200000
+ 6787 strings out of 495059
+ 98210 string characters out of 3182030
+ 180499 words of memory out of 3000000
+ 9848 multiletter control sequences out of 15000+200000
  8893 words of font info for 34 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,7n,26p,586b,325s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,8n,35p,586b,325s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texli
@@ -447,10 +602,10 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmsy8.pfb>
-Output written on update12112014.pdf (3 pages, 550620 bytes).
+Output written on update12112014.pdf (5 pages, 1645687 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 47 compressed objects within 1 object stream
- 10 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 110 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
+ 15 named destinations out of 1000 (max. 500000)
+ 91 words of extra memory for PDF output out of 10000 (max. 10000000)
 

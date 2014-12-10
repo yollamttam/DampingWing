@@ -196,8 +196,46 @@ def zDistributionFull():
 
     input("Press return to end program")
             
+def tauDistributionOne(mFilename):
+    
+    mdata = np.genfromtxt(mFilename)
+    zs = np.copy(mdata[0,:])
+    
+    #we need to put this on some kind of uniform grid
+    minz = np.min(zs)
+    maxz = np.max(zs)
+    dz = .15
+    newzs = np.arange(minz,maxz+dz,dz)
+
+    
+    return zs
+
+
+def tauScatterPlot():
+    f,fbase,z = getAllFilenames()
+    nSpectra = len(f)
+    z = np.array([])
+    tau = np.array([])
+    for i in range(0,nSpectra):
+        if (i != 4):
+            ztemp,tautemp = tauDistributionOne(f[i])
+        if (i == 0):
+            z = ztemp
+            tau = tautemp
+        z = np.hstack([z,ztemp])
+
+    plt.hist(z,50)
+    plt.xlabel('z')
+    plt.ylabel('Frequency')
+    plt.title('Z Histogram without Binning Spectra')
+    plt.show(block=False)
+    
+    print np.min(z),np.max(z)
+
+    input("Press return to end program")
+
             
-def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
+def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t):
     #print "There is a small bug in this code where it is possible that"
     #print "we will neglect dark gaps that overlap with the positive edge"
     #print "of our spectra..."
@@ -227,9 +265,9 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
     if (testingStack != 1):
         sflux = smoothSpectra(sflux,smoothn)
     tsnr = snr[:]*np.sqrt(2*smoothn)
-    tflux = sflux[:] - 3/tsnr[:]
+    tflux = sflux[:] - t/tsnr[:]
     sflux[tflux<0] = 0
-    
+
     
     plots = 0
     if plots:
@@ -268,9 +306,9 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
     largeStackP = nullValue*np.ones(np.shape(vgrid))
     largeStackM = nullValue*np.ones(np.shape(vgrid))
     fluxlength = np.size(flux)
-    plt.plot(vs,sflux)
-    plt.xlabel('v (km/s)')
-    plt.ylabel('F_{unsmoothed}(v)')
+    #plt.plot(vs,sflux)
+    #plt.xlabel('v (km/s)')
+    #plt.ylabel('F_{unsmoothed}(v)')
     for i in range(0,fluxlength):
         if (sflux[i] == 0):
             darkGap = darkGap + 1
@@ -299,7 +337,7 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
                         ps = sp.interp1d(vstack,plus)
                         plusgrid = ps(vgrid)
                         largeStackP = np.vstack((largeStackP,plusgrid))
-                        plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
+                        #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
                     #plt.show(block=False)
                 #negative stack
                 mini = darkIndex - nrange - 1
@@ -317,7 +355,7 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
                         ms = sp.interp1d(vstack,minus)
                         minusgrid = ms(vgrid)
                         largeStackM = np.vstack((largeStackM,minusgrid))
-                        plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
+                        #plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
                     #plt.show(block=False)
                     
                 
@@ -341,7 +379,7 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
                         ps = sp.interp1d(vstack,plus)
                         plusgrid = ps(vgrid)
                         smallStackP = np.vstack((smallStackP,plusgrid))
-                        plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
+                        #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
                     #plt.show(block=False)
                     
 
@@ -360,17 +398,17 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut):
                         ms = sp.interp1d(vstack,minus)
                         minusgrid = ms(vgrid)
                         smallStackM = np.vstack((smallStackM,minusgrid))
-                        plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]),'--')
+                        #plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]),'--')
                     #plt.show(block=False)
                     
                     
             darkGap = 0
             darkIndex = darkIndexReset
 
-    plt.axis([np.min(vs),np.max(vs),-0.1,1.2])
-    plt.show(block=False)
-    input("Flux and all stacking locations...")
-    plt.close()
+    #plt.axis([np.min(vs),np.max(vs),-0.1,1.2])
+    #plt.show(block=False)
+    #input("Flux and all stacking locations...")
+    #plt.close()
     
     print "%s contributed %d stacks..." % (mFilename,stackCount)
     return largeStackP,largeStackM,smallStackP,smallStackM,meansnr
@@ -474,14 +512,14 @@ def createTestFlux(flux):
 
 
 
-def fullStack(lmin,lmax,zcut):
+def fullStack(lmin,lmax,zcut,t):
     #f,z = getFilenames()
     # This will include files without real noise estimates
     f,fbase,z = getAllFilenames()
     nSpectra = len(f)
     for i in range(0,nSpectra):
         if (i != 4):
-            LP,LM,SP,SM,snr = oneStackBinZ(f[i],z[i],lmin,lmax,zcut)
+            LP,LM,SP,SM,snr = oneStackBinZ(f[i],z[i],lmin,lmax,zcut,t)
 
             ### fill in weighting matrix
             print "SNR = %f"%(snr)
@@ -557,7 +595,7 @@ def StackVaryL():
     
     lmin = np.array([100,300,500,1000])
     lmax = 300
-    zcut = 2
+    zcut = 5.5
     for i in range(0,np.size(lmin)):
         vs,large,small = fullStack(lmin[i],lmax,zcut)
         if (i == 0):
@@ -576,6 +614,72 @@ def StackVaryL():
         plt.show(block=False)
     input("Press return to end...")
 
+def StackVaryThreshold():
+    
+    ts = np.array([3,5,900])
+    lmin = 500
+    lmax = 500
+    zcut = 5
+    for i in range(0,np.size(ts)):
+        vs,large,small = fullStack(lmin,lmax,zcut,ts[i])
+
+        plt.plot(vs,small,'--')
+        plt.plot(vs,large)
+        plt.legend('Small')
+        plt.xlabel('v (km/s)')
+        plt.ylabel('Stacked Transmission')
+        plt.title('Splitting at z = %f, $L_{min}$ = %d km/s'%(zcut,lmin))
+        legend1 = "threshold = %f $\sigma$" % (ts[0])
+        legend2 = "threshold = %f $\sigma$" % (ts[0])
+        legend3 = "threshold = %f $\sigma$" % (ts[1])
+        legend4 = "threshold = %f $\sigma$" % (ts[1])
+        legend5 = "threshold = %f $\sigma$" % (ts[2])
+        legend6 = "threshold = %f $\sigma$" % (ts[2])
+
+        plt.legend((legend1,legend2,legend3,legend4,legend5,legend6))
+    plt.show(block=False)
+    input("Press return to end...")
+
+
+def gridPlot():
+    
+    tarray = np.array([1,3,5])
+    zarray = np.array([5,5.25,5.5,5.75])
+    nt = np.size(tarray)
+    nz = np.size(zarray)
+
+    
+    for i in range(0,nt):
+        for j in range(0,nz):
+            
+            
+            ax1 = plt.subplot2grid((nt,nz), (i,j))
+            ### We will run this for each iteration of the loop
+            lmin = np.array([100,300,500,1000])
+            lmax = 300
+            zcut = zarray[j]
+            for q in range(0,np.size(lmin)):
+                vs,large,small = fullStack(lmin[q],lmax,zcut,tarray[i])
+                if (q == 0):
+                    plt.plot(vs,small,'--')
+                plt.plot(vs,large)
+                #plt.legend('Small')
+                if (i==(nt-1)):
+                    plt.xlabel('v (km/s)')
+                if (j==0):
+                    plt.ylabel('t = %d $\sigma$'%(tarray[i]))
+                if (i==0):
+                    plt.title('z = %f'%(zcut))
+                legend1 = "L < %d km/s" % (lmax)
+                legend2 = "L > %d km/s" % (lmin[0])
+                legend3 = "L > %d km/s" % (lmin[1])
+                legend4 = "L > %d km/s" % (lmin[2])
+                legend5 = "L > %d km/s" % (lmin[3])
+                #plt.legend((legend1,legend2,legend3,legend4,legend5))
+            plt.show(block=False)
+    input("Press return to end...")
+
+
 if __name__ == "__main__":
 
-    fullStack(500,500,1)
+    gridPlot()

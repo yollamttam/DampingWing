@@ -189,9 +189,10 @@ def oneStack(mFilename,z,largeCutoff,smallCutoff):
     largeStackP = nullValue*np.ones(np.shape(vgrid))
     largeStackM = nullValue*np.ones(np.shape(vgrid))
     fluxlength = np.size(flux)
-    #plt.plot(vs,sflux)
-    #plt.xlabel('v (km/s)')
-    #plt.ylabel('F(v)')
+    plt.plot(vs,flux)
+    plt.xlabel('v (km/s)')
+    plt.ylabel('F(v)')
+    plt.title('z = %f'%(z))
     for i in range(0,fluxlength):
         if (sflux[i] == 0):
             darkGap = darkGap + 1
@@ -217,7 +218,7 @@ def oneStack(mFilename,z,largeCutoff,smallCutoff):
                     ps = sp.interp1d(vstack,plus)
                     plusgrid = ps(vgrid)
                     largeStackP = np.vstack((largeStackP,plusgrid))
-                    #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
+                    plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
                     #plt.show(block=False)
                 #negative stack
                 mini = darkIndex - nrange - 1
@@ -232,7 +233,7 @@ def oneStack(mFilename,z,largeCutoff,smallCutoff):
                     ms = sp.interp1d(vstack,minus)
                     minusgrid = ms(vgrid)
                     largeStackM = np.vstack((largeStackM,minusgrid))
-                    #plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
+                    plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
                     #plt.show(block=False)
                     
                 
@@ -253,7 +254,7 @@ def oneStack(mFilename,z,largeCutoff,smallCutoff):
                     ps = sp.interp1d(vstack,plus)
                     plusgrid = ps(vgrid)
                     smallStackP = np.vstack((smallStackP,plusgrid))
-                    #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
+                    plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
                     #plt.show(block=False)
                     
 
@@ -269,14 +270,16 @@ def oneStack(mFilename,z,largeCutoff,smallCutoff):
                     ms = sp.interp1d(vstack,minus)
                     minusgrid = ms(vgrid)
                     smallStackM = np.vstack((smallStackM,minusgrid))
-                    #plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]),'--')
+                    plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]),'--')
                     #plt.show(block=False)
                     
                     
             darkGap = 0
             darkIndex = darkIndexReset
-    #input("Flux and all stacking locations...")
-    #plt.close()
+    plt.axis([5000,45000,-0.1,1.2])
+    plt.show(block=False)
+    input("Flux and all stacking locations...")
+    plt.close()
     
     print "%s contributed %d stacks..." % (mFilename,stackCount)
     return largeStackP,largeStackM,smallStackP,smallStackM,meansnr
@@ -462,8 +465,8 @@ def fullStack(lmin,lmax):
 
 if __name__ == "__main__":
 
-    lmin = np.array([100,300,500,1000])
-    lmax = 300
+    lmin = np.array([700,500,500,500])
+    lmax = 700
     for i in range(0,np.size(lmin)):
         vs,large,small = fullStack(lmin[i],lmax)
         if (i == 0):

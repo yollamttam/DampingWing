@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage{matt}
+\usepackage[export]{adjustbox}	
 \begin{document}
 
 \section*{Update for the Week of \today}
@@ -38,11 +39,40 @@
 
 \begin{figure}[h]
   \centering
+  \includegraphics[width=18cm]{sflux_panel1.png}
+  \includegraphics[width=18cm]{flux_panel1.png}
+  \includegraphics[width=18cm]{sflux_panel2.png}
+  \includegraphics[width=18cm]{flux_panel2.png}
+  \caption{The above figures show the stacking locations overplotted on the smoothed (first and third) and unsmoothed (second and fourth) spectra. These are shown for $L_{\text{small}} < 700\ \kms$ and $L_{\text{large}} > 700\ \kms$. Solid lines indicate the edges of the large dark gaps used while the dashed lines indicate the edges of the small dark gaps used. }
+  \label{fig:panel12}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=18cm]{sflux_panel3.png}
+  \includegraphics[width=18cm]{flux_panel3.png}
+  \includegraphics[width=18cm]{sflux_panel4.png}
+  \includegraphics[width=18cm]{flux_panel4.png}
+  \caption{todo}
+  \label{fig:todo}
+\end{figure}
+
+
+\begin{figure}[h]
+  \includegraphics[width=18cm,left]{gridPlot.png}
+  \caption{The above figure shows the results of varying the minimum redshift for the dark gaps in our stack (fixed for each column) and the threshold for calling a pixel dark. The $\sigma$ here refers to the smoothed $\sigma_{N}$.}
+  \label{fig:gridPlot}
+\end{figure}
+
+
+\begin{figure}[h]
+  \centering
   \includegraphics[width=8cm]{Stack_SanityCut.png}
   \includegraphics[width=8cm]{Stack_SanityCutCorrect.png}
   \caption{This is a sanity check, the two above plots should be the same.}
   \label{fig:todo}
 \end{figure}
+
 
 
 \end{document}

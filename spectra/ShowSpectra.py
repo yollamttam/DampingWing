@@ -338,7 +338,7 @@ if __name__ == "__main__":
         f,z = getFilenamesAndRedshifts()
     else:
         f,nf,z = getFilenamesAndRedshiftsWithNoise()
-        nf = 0
+        
     nSpectra = len(f)
     for i in range(0,nSpectra):
         if (noNoise != 1):
