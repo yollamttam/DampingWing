@@ -196,41 +196,79 @@ def zDistributionFull():
 
     input("Press return to end program")
             
-def tauDistributionOne(mFilename):
+def tauDistributionOne(mFilename,taupoints):
     
     mdata = np.genfromtxt(mFilename)
     zs = np.copy(mdata[0,:])
-    
+    flux = np.copy(mdata[1,:])
+    snr = np.copy(mdata[2,:])
     #we need to put this on some kind of uniform grid
     minz = np.min(zs)
     maxz = np.max(zs)
     dz = .15
-    newzs = np.arange(minz,maxz+dz,dz)
-
+    newzs = np.arange(minz,maxz,dz)
     
-    return zs
+    #you're going to have to do something like this
+    #in order to account for F < 2\sigma_N
+    #tsnr = snr[:]*np.sqrt(2*smoothn)
+
+    for i in range(0,np.size(newzs)-1):
+        zmin = newzs[i]
+        zmax = newzs[i+1]
+        
+        #mean redshift and flux of this bin
+        zpoint = np.mean(zs[(zs>=zmin)&(zs<=zmax)])
+        fpoint = np.mean(flux[(zs>=zmin)&(zs<=zmax)])
+        
+        #mean signal-to-noise, then noise sigma, accounting for several bins
+        meansnr = np.mean(snr[(zs>=zmin)&(zs<=zmax)])
+        npixels = np.size(snr[(zs>=zmin)&(zs<=zmax)])
+        nsigma = 1/(meansnr*np.sqrt(npixels))
+        
+        #flux below 2sigman gets set to 2sigman.
+        lowerBound = 0
+        cutoff = 2*nsigma
+        if (fpoint <= 0):
+            fpoint = cutoff
+            lowerBound = 1
+        
+        cutoffTau = -1*np.log(cutoff)
+        if (cutoffTau > 4):
+            print cutoffTau
+        
+
+
+        taueff = -1*np.log(fpoint)
+        datum = np.array([zpoint,taueff,lowerBound])
+        taupoints = np.vstack((taupoints,datum))
+            
+
+    return taupoints
 
 
 def tauScatterPlot():
     f,fbase,z = getAllFilenames()
     nSpectra = len(f)
-    z = np.array([])
-    tau = np.array([])
+    taupoints = np.array([0,0,99])
     for i in range(0,nSpectra):
         if (i != 4):
-            ztemp,tautemp = tauDistributionOne(f[i])
-        if (i == 0):
-            z = ztemp
-            tau = tautemp
-        z = np.hstack([z,ztemp])
+            taupoints = tauDistributionOne(f[i],taupoints)
 
-    plt.hist(z,50)
-    plt.xlabel('z')
-    plt.ylabel('Frequency')
-    plt.title('Z Histogram without Binning Spectra')
-    plt.show(block=False)
     
-    print np.min(z),np.max(z)
+    print np.shape(taupoints)
+    z = taupoints[:,0]
+    taus = taupoints[:,1]
+    lowerBound = taupoints[:,2]
+    fitz = np.arange(np.min(z[z>0]),np.max(z[z>0]),.01)
+    fitz = np.arange(3,6.4,.01)
+    plt.plot(z[lowerBound==0],taus[lowerBound==0],'x')
+    plt.plot(fitz,.85*((1+fitz)/5)**(4.3),'--')
+    plt.plot(z[lowerBound==1],taus[lowerBound==1],'o')
+    plt.xlabel('z')
+    plt.ylabel('Effective Optical Depth')
+    plt.title('Effective Optical Depth vs. z')
+    plt.axis([3,6.4,0,8])
+    plt.show(block=False)
 
     input("Press return to end program")
 
@@ -682,4 +720,4 @@ def gridPlot():
 
 if __name__ == "__main__":
 
-    gridPlot()
+    tauScatterPlot()
