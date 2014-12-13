@@ -206,7 +206,7 @@ def tauDistributionOne(mFilename,taupoints):
     minz = np.min(zs)
     maxz = np.max(zs)
     dz = .15
-    newzs = np.arange(minz,maxz,dz)
+    newzs = np.arange(minz,maxz+dz,dz)
     
     #you're going to have to do something like this
     #in order to account for F < 2\sigma_N
@@ -251,8 +251,7 @@ def tauScatterPlot():
     nSpectra = len(f)
     taupoints = np.array([0,0,99])
     for i in range(0,nSpectra):
-        if (i != 4):
-            taupoints = tauDistributionOne(f[i],taupoints)
+        taupoints = tauDistributionOne(f[i],taupoints)
 
     
     print np.shape(taupoints)
@@ -266,7 +265,7 @@ def tauScatterPlot():
     plt.plot(z[lowerBound==1],taus[lowerBound==1],'o')
     plt.xlabel('z')
     plt.ylabel('Effective Optical Depth')
-    plt.title('Effective Optical Depth vs. z')
+    #plt.title('Effective Optical Depth vs. z')
     plt.axis([3,6.4,0,8])
     plt.show(block=False)
 

@@ -5,21 +5,6 @@
 
 \section*{Update for the Week of \today}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=7cm]{Stack_Zlessthan5p5.png}
-  \includegraphics[width=7cm]{Stack_Zgreaterthan5p5.png}
-  \caption{The above plots show the results of stacking outside of dark gaps located at $z \leq 5.5$ (left) and $z \geq 5.5$ (right). The first thing we notice is that the $z \geq 5.5$ plot is noisier but does not show a hint of a damping-wing feature. Additionally, we see that $\langle F \rangle_{z\leq 5.5} \approx 0.2$, while $\langle F \rangle_{z\geq 5.5} \approx 0.07$, somewhat consistent with what we'd expect.}
-  \label{fig:z5p5}
-\end{figure}
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=7cm]{Stack_Zlessthan5.png}
-  \includegraphics[width=7cm]{Stack_Zgreaterthan5.png}
-  \caption{This figure is identical to Fig. \ref{fig:z5p5} except that we split the stacking at $z_{\text{cut}} = 5$ instead of $z_{\text{cut}} = 5.5$. By doing so, we see that we get $\langle F \rangle_{z>5} \approx 0.1$, somewhat matching what we would expect. It seems the curiously high mean transmission in the left-hand plot of Fig \ref{fig:z5p5} may be due to spectra at $z < 5$.}
-  \label{fig:todo}
-\end{figure}
 
 \begin{figure}[h]
   \centering
@@ -57,6 +42,20 @@
   \label{fig:todo}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=8cm]{tauDistribution_samescale.png}
+  \includegraphics[width=7cm]{fan2006_2.png}
+  \caption{The above plot compares the $\tau_{\text{eff}}$ values that I recover from the provided spectra (left) to those in Fan et al. (2006) (right). The dashed line in each plot corresponds to the power law best fit for $z < 5.5$. In each case, $\tau_{\text{eff}}$ is calculated from an average of the flux performed over a redshift interval $\Delta z = 0.15$. }
+  \label{fig:tauDist}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=8cm]{tauDistribution_2sigma.png}
+  \caption{The above figure is the same as Fig. \ref{fig:tauDist} except that, following Fan et al. (2006), we have replaced regions with  $\langle F \rangle < 2\sigma_{\text{N}}$ with $\langle F \rangle = 2\sigma_{\text{N}}$ in order to get a lower bound on the corresponding $\tau_{\text{eff}}$. These points are likely all to have come from spectra without corresponding noise files, where we have estimated the signal-to-noise values based on transmission redward of \lya. We have yet to check that this signal-to-noise values are reasonable and remove possible duplicate spectra. }
+  \label{fig:todo}
+\end{figure}
 
 \begin{figure}[h]
   \includegraphics[width=18cm,left]{gridPlot.png}
@@ -64,23 +63,31 @@
   \label{fig:gridPlot}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=7cm]{Stack_Zlessthan5p5.png}
+  \includegraphics[width=7cm]{Stack_Zgreaterthan5p5.png}
+  \caption{The above plots show the results of stacking outside of dark gaps located at $z \leq 5.5$ (left) and $z \geq 5.5$ (right). The first thing we notice is that the $z \geq 5.5$ plot is noisier but does not show a hint of a damping-wing feature. Additionally, we see that $\langle F \rangle_{z\leq 5.5} \approx 0.2$, while $\langle F \rangle_{z\geq 5.5} \approx 0.07$, somewhat consistent with what we'd expect.}
+  \label{fig:z5p5}
+\end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=8cm]{tauDistribution_samescale.png}
-  \includegraphics[width=7cm]{fan2006.png}
-  \caption{todo}
+  \includegraphics[width=7cm]{Stack_Zlessthan5.png}
+  \includegraphics[width=7cm]{Stack_Zgreaterthan5.png}
+  \caption{This figure is identical to Fig. \ref{fig:z5p5} except that we split the stacking at $z_{\text{cut}} = 5$ instead of $z_{\text{cut}} = 5.5$. By doing so, we see that we get $\langle F \rangle_{z>5} \approx 0.1$, somewhat matching what we would expect. It seems the curiously high mean transmission in the left-hand plot of Fig \ref{fig:z5p5} may be due to spectra at $z < 5$.}
   \label{fig:todo}
 \end{figure}
 
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=8cm]{Stack_SanityCut.png}
-  \includegraphics[width=8cm]{Stack_SanityCutCorrect.png}
-  \caption{This is a sanity check, the two above plots should be the same.}
-  \label{fig:todo}
-\end{figure}
+
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[width=8cm]{Stack_SanityCut.png}
+%  \includegraphics[width=8cm]{Stack_SanityCutCorrect.png}
+%  \caption{This is a sanity check, the two above plots should be the same.}
+%  \label{fig:todo}
+%\end{figure}
 
 
 
