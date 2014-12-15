@@ -119,11 +119,29 @@ def getAllFilenames():
     return f,fbase,z
 
 
-def findMeanF(zarray,counts,fluxes,mFilename):
+def findMeanF(zarray,counts,fluxes,pcounts,pfluxes,mFilename,z):
 
     mdata = np.genfromtxt(mFilename)
     zs = mdata[0,:]
     flux = np.copy(mdata[1,:])
+    snr = np.copy(mdata[2,:])
+
+    #create variable that is velocity separation 
+    c = 3e5
+    lambdaA0 = 1216*(1+z)
+    lambdas = 1216*(1+zs)
+    vs = c*(lambdaA0-lambdas)/lambdaA0
+
+    #so we'd like to know the flux including and not including
+    #large dark gaps. we'll need to smooth spectra to find dark 
+    #gaps and then find mean outside of those
+    smoothV = 50.0
+    dv = np.abs(vs[1]-vs[0])
+    smoothn = np.ceil(smoothV/dv)
+    sflux = np.copy(flux)
+    sflux = smoothSpectra(sflux,smoothn)
+    tsnr = snr[:]*np.sqrt(2*smoothn)
+    t = np.mean(3/tsnr)
 
     dz = np.abs(zarray[1]-zarray[0])
     minz = np.min(zs)
@@ -131,11 +149,21 @@ def findMeanF(zarray,counts,fluxes,mFilename):
     nz = np.size(zarray)
     for i in range(0,nz):
         if ((minz < zarray[i])&(maxz>zarray[i])):
-            meanf = np.mean(flux[(zs>zarray[i])&(zs<(zarray[i]+dz))])
+            fluxrange = flux[(zs>zarray[i])&(zs<(zarray[i]+dz))]
+            sfluxrange = sflux[(zs>zarray[i])&(zs<(zarray[i]+dz))]
+            pfluxrange = fluxrange[sfluxrange>t]
+            meanf = np.mean(fluxrange)
+            
+
             fluxes[i] = fluxes[i] + meanf
             counts[i] = counts[i] + 1
             
-    return fluxes,counts
+            if (np.size(pfluxrange>0)):
+                meanpf = np.mean(pfluxrange)
+                pfluxes[i] = pfluxes[i] + meanpf
+                pcounts[i] = pcounts[i] + 1
+                
+    return fluxes,counts,pfluxes,pcounts
 
 def FvsZ():
     f,fbase,z = getAllFilenames()
@@ -148,15 +176,20 @@ def FvsZ():
     zarray = np.arange(zmin,zmax+dz,dz)
     counts = np.zeros(np.shape(zarray))+epsilon
     fluxes = np.zeros(np.shape(zarray))
+    pcounts = np.zeros(np.shape(zarray))+epsilon
+    pfluxes = np.zeros(np.shape(zarray))
     for i in range(0,nSpectra):
         if (i != 4):
-            fluxes,counts = findMeanF(zarray,counts,fluxes,f[i])
+            fluxes,counts,pfluxes,pcounts = findMeanF(zarray,counts,fluxes,pcounts,pfluxes,f[i],z[i])
             
     fluxes = fluxes/counts
+    pfluxes = pfluxes/pcounts
     zarray = zarray + dz/2
     plt.plot(zarray[fluxes>0],fluxes[fluxes>0])
+    plt.plot(zarray[pfluxes>0],pfluxes[pfluxes>0])
     plt.xlabel('z')
     plt.ylabel('<F>')
+    plt.legend(['<F>','<F|flux>'])
     plt.title('Mean Transmission vs. Z (First Pass)')
     plt.show(block=False)
     input("Press Enter to end program...")
@@ -272,7 +305,7 @@ def tauScatterPlot():
     input("Press return to end program")
 
             
-def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t):
+def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t,Larray):
     #print "There is a small bug in this code where it is possible that"
     #print "we will neglect dark gaps that overlap with the positive edge"
     #print "of our spectra..."
@@ -374,6 +407,10 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t):
                         ps = sp.interp1d(vstack,plus)
                         plusgrid = ps(vgrid)
                         largeStackP = np.vstack((largeStackP,plusgrid))
+                        Ldark = dv*nextent
+                        Lt = t/snr[i]
+                        addPoint = np.array([Lt,Ldark])
+                        Larray = np.vstack((Larray,addPoint))
                         #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
                     #plt.show(block=False)
                 #negative stack
@@ -392,6 +429,10 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t):
                         ms = sp.interp1d(vstack,minus)
                         minusgrid = ms(vgrid)
                         largeStackM = np.vstack((largeStackM,minusgrid))
+                        Ldark = dv*nextent
+                        Lt = t/snr[i]
+                        addPoint = np.array([Lt,Ldark])
+                        Larray = np.vstack((Larray,addPoint))
                         #plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
                     #plt.show(block=False)
                     
@@ -416,6 +457,10 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t):
                         ps = sp.interp1d(vstack,plus)
                         plusgrid = ps(vgrid)
                         smallStackP = np.vstack((smallStackP,plusgrid))
+                        Ldark = dv*nextent
+                        Lt = t/snr[i]
+                        addPoint = np.array([Lt,Ldark])
+                        Larray = np.vstack((Larray,addPoint))
                         #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
                     #plt.show(block=False)
                     
@@ -435,6 +480,10 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t):
                         ms = sp.interp1d(vstack,minus)
                         minusgrid = ms(vgrid)
                         smallStackM = np.vstack((smallStackM,minusgrid))
+                        Ldark = dv*nextent
+                        Lt = t/snr[i]
+                        addPoint = np.array([Lt,Ldark])
+                        Larray = np.vstack((Larray,addPoint))
                         #plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]),'--')
                     #plt.show(block=False)
                     
@@ -448,7 +497,7 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t):
     #plt.close()
     
     print "%s contributed %d stacks..." % (mFilename,stackCount)
-    return largeStackP,largeStackM,smallStackP,smallStackM,meansnr
+    return largeStackP,largeStackM,smallStackP,smallStackM,meansnr,Larray
 
 
 def averageStacks(LP,LM,SP,SM,WLP,WLM,WSP,WSM):
@@ -554,9 +603,10 @@ def fullStack(lmin,lmax,zcut,t):
     # This will include files without real noise estimates
     f,fbase,z = getAllFilenames()
     nSpectra = len(f)
+    Larray = np.array([1,1])
     for i in range(0,nSpectra):
         if (i != 4):
-            LP,LM,SP,SM,snr = oneStackBinZ(f[i],z[i],lmin,lmax,zcut,t)
+            LP,LM,SP,SM,snr,Larray = oneStackBinZ(f[i],z[i],lmin,lmax,zcut,t,Larray)
 
             ### fill in weighting matrix
             print "SNR = %f"%(snr)
@@ -625,6 +675,14 @@ def fullStack(lmin,lmax,zcut,t):
         plt.plot(vs,smallErr)
         plt.show(block=False)
         input("these are the errors?")
+
+
+    Lscatter = 1
+    if Lscatter:
+        Lt = Larray[:,0]
+        Ldark = Larray[:,1]
+        plt.plot(Lt,Ldark,'x'
+
 
     return vs,large,small
 
@@ -719,4 +777,4 @@ def gridPlot():
 
 if __name__ == "__main__":
 
-    tauScatterPlot()
+    FvsZ()
