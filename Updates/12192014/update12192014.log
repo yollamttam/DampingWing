@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  15 DEC 2014 13:18
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  17 DEC 2014 19:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -255,6 +255,9 @@ Package hyperref Warning: Option `pdftex' has already been used,
 
 LaTeX Warning: Label `fig:todo' multiply defined.
 
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
 )
 \openout1 = `update12192014.aux'.
 
@@ -345,10 +348,10 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 10.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-<meanFs.png, id=6, 586.8324pt x 442.2924pt>
-File: meanFs.png Graphic file (type png)
- <use meanFs.png>
-Package pdftex.def Info: meanFs.png used on input line 16.
+<LvsT.png, id=6, 586.8324pt x 442.2924pt>
+File: LvsT.png Graphic file (type png)
+ <use LvsT.png>
+Package pdftex.def Info: LvsT.png used on input line 16.
 (pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
 
 <Stack_Zgreaterthan5.png, id=7, 586.8324pt x 442.2924pt>
@@ -358,51 +361,83 @@ File: Stack_Zgreaterthan5.png Graphic file (type png)
 Package pdftex.def Info: Stack_Zgreaterthan5.png used on input line 17.
 (pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
 
-<Stack_Zgreaterthan5p5.png, id=8, 604.1772pt x 377.2494pt>
+<LvsT_zGreaterThan5p5.png, id=8, 586.8324pt x 442.2924pt>
+File: LvsT_zGreaterThan5p5.png Graphic file (type png)
+
+<use LvsT_zGreaterThan5p5.png>
+Package pdftex.def Info: LvsT_zGreaterThan5p5.png used on input line 18.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+
+<Stack_Zgreaterthan5p5.png, id=9, 604.1772pt x 377.2494pt>
 File: Stack_Zgreaterthan5p5.png Graphic file (type png)
 
 <use Stack_Zgreaterthan5p5.png>
-Package pdftex.def Info: Stack_Zgreaterthan5p5.png used on input line 18.
+Package pdftex.def Info: Stack_Zgreaterthan5p5.png used on input line 19.
 (pdftex.def)             Requested size: 227.62204pt x 142.12439pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 24.
+<meanFs.png, id=10, 586.8324pt x 442.2924pt>
+File: meanFs.png Graphic file (type png)
+ <use meanFs.png>
+Package pdftex.def Info: meanFs.png used on input line 27.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+
+<FluxCDF.png, id=11, 586.8324pt x 442.2924pt>
+File: FluxCDF.png Graphic file (type png)
+ <use FluxCDF.png>
+Package pdftex.def Info: FluxCDF.png used on input line 28.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+File: Stack_Zgreaterthan5.png Graphic file (type png)
+
+<use Stack_Zgreaterthan5.png>
+Package pdftex.def Info: Stack_Zgreaterthan5.png used on input line 29.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+File: Stack_Zgreaterthan5p5.png Graphic file (type png)
+ <use Stack_Zgreaterthan5p5.png>
+Package pdftex.def Info: Stack_Zgreaterthan5p5.png used on input line 30.
+(pdftex.def)             Requested size: 227.62204pt x 142.12439pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 36.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./QSOTemplateCheck.png>] [
-2 <./meanFs.png> <./Stack_Zgreaterthan5.png> <./Stack_Zgreaterthan5p5.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 24.
+2 <./LvsT.png> <./Stack_Zgreaterthan5.png> <./LvsT_zGreaterThan5p5.png> <./Stac
+k_Zgreaterthan5p5.png>] [3 <./meanFs.png> <./FluxCDF.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 36.
 
 (./update12192014.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 24.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 24.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 36.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 36.
 Package rerunfilecheck Info: File `update12192014.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 24.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 36.
  ) 
 Here is how much of TeX's memory you used:
- 5984 strings out of 495059
- 85307 string characters out of 3182030
- 160701 words of memory out of 3000000
- 9099 multiletter control sequences out of 15000+200000
+ 6001 strings out of 495059
+ 85593 string characters out of 3182030
+ 161701 words of memory out of 3000000
+ 9111 multiletter control sequences out of 15000+200000
  9061 words of font info for 35 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,6n,26p,347b,321s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,6n,26p,347b,325s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on update12192014.pdf (2 pages, 253998 bytes).
+Output written on update12192014.pdf (3 pages, 324687 bytes).
 PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 62 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
+ 8 named destinations out of 1000 (max. 500000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
