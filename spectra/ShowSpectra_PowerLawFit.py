@@ -238,16 +238,25 @@ def plotSpectra(sFilename,nFilename,z):
         tLambdas = tLambdas*(1+z)
         
         snrEstimate = sMean*1.0/np.sqrt(sVar)
-
+        lambdaRed = 1400
+        lambdaBlue = 972
+        maxflux = np.max(flux[(lambdas>lambdaBlue*(1+z))&(lambdas<lambdaRed*(1+z))])
         #plot both together
         plt.figure()
-        plt.plot(lambdas,PLfit)
+        plt.plot(tLambdas,tFlux)
+        plt.plot(lambdas,PLfit)        
         plt.plot(lambdas,flux)
+        plt.xlabel('Wavelength (Angstroms)')
+        plt.ylabel('F')
+        plt.axis([lambdaBlue*(1+z),lambdaRed*(1+z),0,maxflux])
+        plt.legend(('Raw Flux','Power-Law Fit','Template'))
+        plt.show(block=False)
+        
 
         maxy = max([max(fluxA),max(tFlux)])
         plt.plot([lambdaA,lambdaA],[min(fluxA),maxy])
         plt.plot([lambdaB,lambdaB],[min(fluxA),maxy])
-        plt.axis([lambdaG, max(lambdas), min(fluxA), maxy])
+        
         plt.xlabel('$\lambda$ ($\AA$)')
         plt.ylabel('Flux (Arbitrary Units)')
         plt.legend(['Template Fit','Spectra','Ly$\\alpha$','Ly$\\beta$'])

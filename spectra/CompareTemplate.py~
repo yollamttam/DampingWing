@@ -1,0 +1,42 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def CompareAll():
+    rall = np.genfromtxt('hst_comp01_all.asc')
+    rq = np.genfromtxt('hst_comp01_rq.asc')
+    rl = np.genfromtxt('hst_comp01_rl.asc')
+    original = np.genfromtxt('LBQS.lis')
+
+    lambdaAll = rall[:,0]
+    lambdaRQ = rq[:,0]
+    lambdaRL = rl[:,0]
+    lambdaO = original[:,0]
+
+    fluxAll = rall[:,1]
+    fluxRQ = rq[:,1]
+    fluxRL = rl[:,1]
+    fluxO = original[:,1]
+
+    Lya = 1216
+    Lyb = 1026
+    Oxy = 1034
+
+    plt.plot(lambdaAll,fluxAll)
+    plt.plot(lambdaRQ,fluxRQ)
+    plt.plot(lambdaRL,fluxRL)
+    #plt.plot(lambdaO,fluxO)
+    #plt.plot(
+    plt.show(block=False)
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+
+    CompareAll()
