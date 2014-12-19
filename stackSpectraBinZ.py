@@ -118,6 +118,87 @@ def getAllFilenames():
 
     return f,fbase,z
 
+def getAllFilenamesLyb():
+
+    f1 = 'Q0836-spec_LybMatrix.tex'
+    f2 = 'Q1306-spec_LybMatrix.tex'
+    f3 = 'qso_z_628_lo_res_LybMatrix.txt'
+    f4 = 'qso_z_637_lo_res_LybMatrix.txt'
+    f5 = 'z517.spec_LybMatrix.tex'
+    f6 = 'z521.spec_LybMatrix.tex'
+    f7 = 'z530.spec_LybMatrix.tex'
+    f8 = 'z531.spec_LybMatrix.tex'
+    f9 = 'z541.spec_LybMatrix.tex'
+    f10 = 'z574_LybMatrix.tex'
+    f11 = 'z580_LybMatrix.tex'
+    f12 = 'z582_hres.spec_LybMatrix.tex'
+    f13 = 'z582_LybMatrix.tex'
+    f14 = 'z595_LybMatrix.tex'
+    f15 = 'z599_hres.spec_LybMatrix.tex'
+    f16 = 'z599_LybMatrix.tex'
+    f17 = 'z605_LybMatrix.tex'
+    f18 = 'z607_LybMatrix.tex'
+    f19 = 'z614_LybMatrix.tex'
+    f20 = 'z621_LybMatrix.tex'
+    
+    print "We are skipping %s since its fucked..."%(f7)
+    farray1 = [f1, f2, f3, f4, f5, f6, f8, f9, f10]
+    farray2 = [f11, f12, f13, f14, f15, f16, f17, f18, f19, f20]
+    f = np.hstack((farray1,farray2))
+    
+    f1 = 'Q0836-spec.tex'
+    f2 = 'Q1306-spec.tex'
+    f3 = 'qso_z_628_lo_res.txt'
+    f4 = 'qso_z_637_lo_res.txt'
+    f5 = 'z517.spec.tex'
+    f6 = 'z521.spec.tex'
+    f7 = 'z530.spec.tex'
+    f8 = 'z531.spec.tex'
+    f9 = 'z541.spec.tex'
+    f10 = 'z574.tex'
+    f11 = 'z580.tex'
+    f12 = 'z582_hres.spec.tex'
+    f13 = 'z582.tex'
+    f14 = 'z595.tex'
+    f15 = 'z599_hres.spec.tex'
+    f16 = 'z599.tex'
+    f17 = 'z605.tex'
+    f18 = 'z607.tex'
+    f19 = 'z614.tex'
+    f20 = 'z621.tex'
+    
+    print "We are skipping %s since its fucked..."%(f7)
+    farray1 = [f1, f2, f3, f4, f5, f6, f8, f9, f10]
+    farray2 = [f11, f12, f13, f14, f15, f16, f17, f18, f19, f20]
+    fbase = np.hstack((farray1,farray2))
+
+
+    z1 = 5.82
+    z2 = 5.99
+    z3 = 6.28
+    z4 = 6.37
+    z5 = 5.17
+    z6 = 5.21
+    z7 = 5.30
+    z8 = 5.31
+    z9 = 5.41
+    z10 = 5.74
+    z11 = 5.80
+    z12 = 5.82
+    z13 = 5.82
+    z14 = 5.95
+    z15 = 5.99
+    z16 = 5.99
+    z17 = 6.05
+    z18 = 6.07
+    z19 = 6.14
+    z20 = 6.21
+    zarray1 = [z1, z2, z3, z4, z5, z6, z8, z9, z10]
+    zarray2 = [z11, z12, z13, z14, z15, z16, z17, z18, z19, z20]
+    z = np.hstack((zarray1,zarray2))
+
+    return f,fbase,z
+
 
 def findMeanF(zarray,counts,fluxes,pcounts,pfluxes,mFilename,z):
 
@@ -389,7 +470,7 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t,Larray):
             #mark beginning of dark gap
             if (darkIndex == darkIndexReset):
                 darkIndex = i
-        if ((sflux[i] != 0) & (sflux[i-1]==0)):
+        if ((sflux[i] != 0) & (sflux[i-1]==0) & (i > 0)):
             #stack in one direction, check for boundaries too
             if (darkGap >= largeCutoff):
                 stackCount = stackCount + 1
@@ -506,7 +587,7 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t,Larray):
     return largeStackP,largeStackM,smallStackP,smallStackM,meansnr,Larray
 
 
-def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larray):
+def oneStackBinZLyb(mFilenameA,mFilenameB,z,largeCutoff,smallCutoff,zcut,t,Larray):
     #print "There is a small bug in this code where it is possible that"
     #print "we will neglect dark gaps that overlap with the positive edge"
     #print "of our spectra..."
@@ -540,23 +621,24 @@ def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
     
     #create smoothed version of flux. 
     smoothV = 50.0 #km/s
-    dv = np.abs(vs[1]-vs[0])
+    dvB = np.abs(vsB[1]-vsB[0])
+    dvA = np.abs(vsA[1]-vsA[0])
     #print "apparently, resolution is %f km/s..."%(dv)
-    smoothn = np.ceil(smoothV/dv)
+    smoothn = np.ceil(smoothV/dvB)
     #print "smoothing over %f pixels"%(smoothn)
     if (testingStack != 1):
         sfluxB = smoothSpectra(sfluxB,smoothn)
-    tsnr = snr[:]*np.sqrt(2*smoothn)
+    tsnr = snrB[:]*np.sqrt(2*smoothn)
     tflux = sfluxB[:] - t/tsnr[:]
     sfluxB[tflux<0] = 0
 
     
     plots = 0
     if plots:
-        plt.plot(vs,fluxB)
-        plt.plot(vs,sfluxB)
-        plt.plot(vs,sfluxB*0)
-        plt.plot(vs,3/tsnr)
+        plt.plot(vsB,fluxB)
+        plt.plot(vsB,sfluxB)
+        plt.plot(vsB,sfluxB*0)
+        plt.plot(vsB,3/tsnr)
         plt.show(block=False)
         input('Enter something to continue...')
         plt.close()
@@ -566,7 +648,7 @@ def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
         sfluxB = np.copy(fluxB)
         print np.shape(fluxB)
 
-    print "beginning stack... prepare for bugs..."
+        
     #ok, so now we actually need to iterate through spectra, stack
     stackCount = 0
     darkGap = 0
@@ -574,15 +656,16 @@ def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
     darkIndex = darkIndexReset
     nullValue = -999
     vrange = 1000 #km/s
-    nrange = np.ceil(vrange/dv) #number of pixels to stack
+    nrange = np.ceil(vrange/dvA) #number of pixels to stack
     #we'll eventually need to interpolate onto a fixed grid here
-    vstack = np.arange(0,2000,dv)
+    vstack = np.arange(0,2000,dvA)
     nrange = np.size(vstack)
+    nrangeB = np.round(nrange*dvA/dvB)
     vgrid = np.arange(0,800,2)
-    smallCutoff = smallCutoff/dv
-    largeCutoff = largeCutoff/dv
-    superSmallCutoff = superSmallCutoff/dv
-    print smallCutoff,largeCutoff,superSmallCutoff
+    smallCutoff = smallCutoff/dvB
+    largeCutoff = largeCutoff/dvB
+    superSmallCutoff = superSmallCutoff/dvB
+    
     smallStackP = nullValue*np.ones(np.shape(vgrid))
     smallStackM = nullValue*np.ones(np.shape(vgrid))
     largeStackP = nullValue*np.ones(np.shape(vgrid))
@@ -601,7 +684,7 @@ def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
             #mark beginning of dark gap
             if (darkIndex == darkIndexReset):
                 darkIndex = i
-        if ((sfluxB[i] != 0) & (sfluxB[i-1]==0)):
+        if ((sfluxB[i] != 0) & (sfluxB[i-1]==0) & (i > 0)):
             #stack in one direction, check for boundaries too
             if (darkGap >= largeCutoff):
                 stackCount = stackCount + 1
@@ -612,7 +695,7 @@ def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
 
                 # OK, so here we probably have to do some thinking
                 mini = i
-                maxi = i + nrange
+                maxi = i + nrangeB
                 plus = nullValue*np.ones(nrange)
                 if (maxi >= fluxlength):
                     maxi = (fluxlength - 1)
@@ -620,63 +703,77 @@ def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
                 zmaxB = zsB[maxi]
 
 
-                # check for 5 scenarios
-                if ((zminB>zminA)&(zmaxB<zmaxA)):
-                    # you can stack
-                    miniA = 
-                elif (zminB<zminA):
-                    if (zmaxB>zminA):
-                        # you can stack
-                        pass
-                    else:
-                        # you cannot stack
-                        pass
+                #check if able to stack
+                if ((zminB>=zminA)&(zminB<zmaxA)):
+                    miniA = np.size(zsA[zsA<=zminB])-1
+                    maxiA = miniA + nrange 
+                    beginning = 0
+                    if (maxiA >= np.size(fluxA)):
+                        maxiA = np.size(fluxA) - 1
+                    nextent = maxiA-miniA
+                 
+                else:
+                    nextent = 0
+                    print "should this error have happened?"
+                
 
-                elif (zmaxB>zmaxA):
-                    if (zmaxA>zminB):
-                        # you can stack
-                        pass
-                    else:
-                        # you cannot stack
-                        pass
-
-
-
-                # nextent = maxi-mini
+                # if (nextent>=nrange):
+                #    nextent = nrange-1
                 if (nextent > 0):
-                    condition1 = (zcut>0)&(zs[mini]>=zcut)
-                    condition2 = (zcut<0)&(zs[mini]<=np.abs(zcut))
+                    condition1 = (zcut>0)&(zsB[mini]>=zcut)
+                    condition2 = (zcut<0)&(zsB[mini]<=np.abs(zcut))
                     
                     if (condition1 | condition2):
-                        plus[0:nextent] = flux[mini:maxi]
+                        plus[0:nextent] = fluxA[miniA:maxiA]
                         ps = sp.interp1d(vstack,plus)
                         plusgrid = ps(vgrid)
                         largeStackP = np.vstack((largeStackP,plusgrid))
-                        Ldark = dv*np.abs(darkIndex-i)
-                        Lt = t/snr[i]
+                        Ldark = dvB*np.abs(darkIndex-i)
+                        Lt = t/snrB[i]
                         addPoint = np.array([Lt,Ldark])
                         Larray = np.vstack((Larray,addPoint))
                         
                         # plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
                     #plt.show(block=False)
                 #negative stack
-                mini = darkIndex - nrange - 1
+                mini = darkIndex - nrangeB - 1
                 maxi = darkIndex - 1
                 minus = nullValue*np.ones(nrange)
                 if (mini < 0):
                     mini = 0
-                nextent = maxi-mini
+                
+                zminB = zsB[mini]
+                zmaxB = zsB[maxi]
 
+                #check if able to stack
+                if ((zmaxB>zminA)&(zmaxB<=zmaxA)):
+                    maxiA = np.size(zsA[zsA<=zmaxB])-1
+                    miniA = maxiA - nrange 
+                    beginning = 1
+                    if (miniA < 0):
+                        miniA = 0
+                    nextent = maxiA-miniA
+                else:
+                    nextent = 0
+                    print "should this error have happened?"
+            
+                if (darkIndex <= 0):
+                    nextent = 0
+
+
+                #if (nextent >= nrange):
+                #    nextent = nrange-1
+                # something somewhat-complicated will happen here
                 if (nextent > 0):
-                    condition1 = (zcut>0)&(zs[maxi]>=zcut)
-                    condition2 = (zcut<0)&(zs[maxi]<=np.abs(zcut))
+                    condition1 = (zcut>0)&(zsB[maxi]>=zcut)
+                    condition2 = (zcut<0)&(zsB[maxi]<=np.abs(zcut))
                     if (condition1 | condition2):
-                        minus[0:nextent] = flux[mini:maxi]
+                        minus[0:nextent] = fluxA[miniA:maxiA]
                         ms = sp.interp1d(vstack,minus)
                         minusgrid = ms(vgrid)
                         largeStackM = np.vstack((largeStackM,minusgrid))
-                        Ldark = dv*nextent
-                        Lt = t/snr[i]
+                        Ldark = dvB*nextent
+                        Lt = t/snrB[i]
                         
                         
                         # plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
@@ -690,21 +787,36 @@ def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
 
                 #positive stack
                 mini = i
-                maxi = i + nrange
+                maxi = i + nrangeB
                 plus = nullValue*np.ones(nrange)
                 if (maxi >= fluxlength):
                     maxi = (fluxlength - 1)
-                nextent = maxi-mini
+                zminB = zsB[mini]
+                zmaxB = zsB[maxi]
+                
+                # check if able to stack
+                if ((zminB>=zminA)&(zminB<zmaxA)):
+                    miniA = np.size(zsA[zsA<=zminB])-1
+                    maxiA = miniA + nrange 
+                    beginning = 1
+                    if (maxiA >= np.size(fluxA)):
+                        maxiA = np.size(fluxA) - 1
+                    nextent = maxiA-miniA
+                else: 
+                    nextent = 0
+                    print "should this error have happened?"                        
+                #if (nextent >= nrange):
+                #    nextent = nrange - 1
                 if (nextent > 0):
-                    condition1 = (zcut>0)&(zs[mini]>=zcut)
-                    condition2 = (zcut<0)&(zs[mini]<=np.abs(zcut))
+                    condition1 = (zcut>0)&(zsB[mini]>=zcut)
+                    condition2 = (zcut<0)&(zsB[mini]<=np.abs(zcut))
                     if (condition1 | condition2):
-                        plus[0:nextent] = flux[mini:maxi]
+                        plus[0:nextent] = fluxA[miniA:maxiA]
                         ps = sp.interp1d(vstack,plus)
                         plusgrid = ps(vgrid)
                         smallStackP = np.vstack((smallStackP,plusgrid))
-                        Ldark = dv*np.abs(darkIndex-i)
-                        Lt = t/snr[i]
+                        Ldark = dvB*np.abs(darkIndex-i)
+                        Lt = t/snrB[i]
                         addPoint = np.array([Lt,Ldark])
                         Larray = np.vstack((Larray,addPoint))
                         #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
@@ -712,22 +824,43 @@ def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
                     
 
                 #negative stack
-                mini = darkIndex - nrange - 1
+                mini = darkIndex - nrangeB - 1
                 maxi = darkIndex - 1
                 minus = nullValue*np.ones(nrange)
                 if (mini < 0):
                     mini = 0
-                nextent = maxi-mini
+                    
+                zminB = zsB[mini]
+                zmaxB = zsB[maxi]
+                
+                if ((zmaxB>zminA)&(zmaxB<=zmaxA)):
+                    maxiA = np.size(zsA[zsA<=zmaxB])-1
+                    miniA = maxiA - nrange 
+                    beginning = 1
+                    if (miniA < 0):
+                        miniA = 0
+                    nextent = maxiA-miniA
+                else:
+                    nextent = 0
+                    print "should this error have happened?"
+
+                if (darkIndex <= 0):
+                    nextent = 0
+
+                
+                #if (nextent >= nrange):
+                #    nextent = nrange - 1
                 if (nextent > 0):
-                    condition1 = (zcut>0)&(zs[maxi]>=zcut)
-                    condition2 = (zcut<0)&(zs[maxi]<=np.abs(zcut))
+                    condition1 = (zcut>0)&(zsB[maxi]>=zcut)
+                    condition2 = (zcut<0)&(zsB[maxi]<=np.abs(zcut))
                     if (condition1 | condition2):
-                        minus[0:nextent] = flux[mini:maxi]
+                        
+                        minus[0:nextent] = fluxA[miniA:maxiA]
                         ms = sp.interp1d(vstack,minus)
                         minusgrid = ms(vgrid)
                         smallStackM = np.vstack((smallStackM,minusgrid))
-                        Ldark = dv*nextent
-                        Lt = t/snr[i]
+                        Ldark = dvB*nextent
+                        Lt = t/snrB[i]
                         
                         
                         # plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]),'--')
@@ -742,8 +875,8 @@ def oneStackBinZLyb(mFilenameA,mfilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
     #input("Flux and all stacking locations...")
     #plt.close()
     
-    print "%s contributed %d stacks..." % (mFilename,stackCount)
-    return largeStackP,largeStackM,smallStackP,smallStackM,meansnr,Larray
+    print "%s contributed %d stacks..." % (mFilenameA,stackCount)
+    return largeStackP,largeStackM,smallStackP,smallStackM,meansnrA,Larray
 
 
 
@@ -804,14 +937,14 @@ def averageStacks(LP,LM,SP,SM,WLP,WLM,WSP,WSM):
         for j in range(0,np.shape(L)[1]):
             if (np.abs(L[i,j]) < maxflux):
                 largeVar[j] = largeVar[j] + (L[i,j]-large[j])**2
-    largeVar = largeVar/Lcounts**2
+    largeVar = largeVar/Lcounts
 
     ## Calculate Small Dark Gap Variances
     for i in range(0,np.shape(S)[0]):
         for j in range(0,np.shape(S)[1]):
             if (np.abs(S[i,j]) < maxflux):
                 smallVar[j] = smallVar[j] + (S[i,j]-small[j])**2
-    smallVar = smallVar/Scounts**2
+    smallVar = smallVar/Scounts
 
 
     return large,small,largeVar,smallVar
@@ -846,16 +979,28 @@ def createTestFlux(flux):
 
 
 
-def fullStack(lmin,lmax,zcut,t):
+def fullStack(lmin,lmax,zcut,t,UseLyb):
     #f,z = getFilenames()
     # This will include files without real noise estimates
     f,fbase,z = getAllFilenames()
+    fb,fbaseb,zb = getAllFilenamesLyb()
+    PLfit = 0
+    if (UseLyb == 0):
+        fb = f
     nSpectra = len(f)
     Larray = np.array([1,1])
     for i in range(0,nSpectra):
+        if (PLfit):
+            fileBase, fileExt = os.path.splitext(f[i])
+            finput = "%s_PLfit%s" % (fileBase,fileExt)
+            fileBase, fileExt = os.path.splitext(fb[i])
+            fbinput = "%s_PLfit%s" % (fileBase,fileExt)
+        else:
+            finput = f[i]
+            fbinput = fb[i]
         if (i != 4):
-            LP,LM,SP,SM,snr,Larray = oneStackBinZ(f[i],z[i],lmin,lmax,zcut,t,Larray)
-
+            LP,LM,SP,SM,snr,Larray = oneStackBinZLyb(finput,fbinput,z[i],lmin,lmax,zcut,t,Larray)
+            # LP,LM,SP,SM,snr,Larray = oneStackBinZ(f[i],z[i],lmin,lmax,zcut,t,Larray)
             ### fill in weighting matrix
             print "SNR = %f"%(snr)
             #snr = 1
@@ -908,13 +1053,13 @@ def fullStack(lmin,lmax,zcut,t):
     if plots:
         plt.plot(vs,large)
         largeErr = np.sqrt(largeVar)
-        #plt.errorbar(vs,large,yerr=largeErr)
+        plt.errorbar(vs,large,yerr=largeErr)
         plt.xlabel('v (km/s)')
         plt.show(block=False)
         input("Enter something to continue (This is large stack):")
         plt.plot(vs,small)
         smallErr = np.sqrt(smallVar)
-        #plt.errorbar(vs,small,yerr=smallErr)
+        plt.errorbar(vs,small,yerr=smallErr)
         plt.legend(('Large Stack','Small Stack'))
         plt.show(block=False)
         input("Now we have added the small stack")
@@ -925,7 +1070,7 @@ def fullStack(lmin,lmax,zcut,t):
         input("these are the errors?")
 
 
-    Lscatter = 1
+    Lscatter = 0
     if Lscatter:
         print np.shape(Larray)
         Lt = Larray[:,0]
@@ -935,18 +1080,25 @@ def fullStack(lmin,lmax,zcut,t):
         plt.ylabel('Dark Gap Size (km/s)')
         plt.show(block=False)
         input("Press return to end program...")
-    return vs,large,small
+    return vs,large,small,largeVar,smallVar
 
 def StackVaryL():
     
     lmin = np.array([100,300,500,1000])
     lmax = 300
-    zcut = 5.5
+    zcut = 5
+    t = 3
+    UseLyb = 1
     for i in range(0,np.size(lmin)):
-        vs,large,small = fullStack(lmin[i],lmax,zcut)
+        vs,large,small,largeVar,smallVar = fullStack(lmin[i],lmax,zcut,t,UseLyb)
         if (i == 0):
             plt.plot(vs,small,'--')
+            smallErr = np.sqrt(smallVar)
+            #plt.errorbar(vs,small,yerr=smallErr)
         plt.plot(vs,large)
+        plt.plot(vs,large)
+        largeErr = np.sqrt(largeVar)
+        #plt.errorbar(vs,large,yerr=largeErr)
         plt.legend('Small')
         plt.xlabel('v (km/s)')
         plt.ylabel('Stacked Transmission')
@@ -960,14 +1112,44 @@ def StackVaryL():
         plt.show(block=False)
     input("Press return to end...")
 
+def StackOneL():
+    
+    lmax = 300
+    lmin = 500
+    UseLyb = 1
+    zcut = 5.5
+    t = 3
+    vs,large,small,largeVar,smallVar = fullStack(lmin,lmax,zcut,t,UseLyb)
+    
+
+    smallErr = np.sqrt(smallVar)
+    largeErr = np.sqrt(largeVar)
+    plt.errorbar(vs,small,yerr=smallErr)
+    plt.errorbar(vs,large,yerr=largeErr)
+    plt.plot(vs,small,'--')
+    plt.plot(vs,large)
+    plt.legend('Small')
+    plt.xlabel('v (km/s)')
+    plt.ylabel('Stacked Transmission')
+    plt.title('Splitting at z = %f, Using Lyb = %d'%(zcut,UseLyb))
+    legend1 = "L < %d km/s" % (lmax)
+    legend2 = "L > %d km/s" % (lmin)
+    plt.legend((legend1,legend2))
+
+
+    plt.show(block=False)
+    input("Press return to end...")
+
+
 def StackVaryThreshold():
     
     ts = np.array([3,5,900])
     lmin = 500
     lmax = 500
     zcut = 5
+    UseLyb = 1
     for i in range(0,np.size(ts)):
-        vs,large,small = fullStack(lmin,lmax,zcut,ts[i])
+        vs,large,small = fullStack(lmin,lmax,zcut,ts[i],UseLyb)
 
         plt.plot(vs,small,'--')
         plt.plot(vs,large)
@@ -994,7 +1176,7 @@ def gridPlot():
     nt = np.size(tarray)
     nz = np.size(zarray)
 
-    
+    UseLyb = 0
     for i in range(0,nt):
         for j in range(0,nz):
             
@@ -1005,7 +1187,7 @@ def gridPlot():
             lmax = 300
             zcut = zarray[j]
             for q in range(0,np.size(lmin)):
-                vs,large,small = fullStack(lmin[q],lmax,zcut,tarray[i])
+                vs,large,small = fullStack(lmin[q],lmax,zcut,tarray[i],UseLyb)
                 if (q == 0):
                     plt.plot(vs,small,'--')
                 plt.plot(vs,large)
@@ -1015,7 +1197,7 @@ def gridPlot():
                 if (j==0):
                     plt.ylabel('t = %d $\sigma$'%(tarray[i]))
                 if (i==0):
-                    plt.title('z = %f'%(zcut))
+                    plt.title('z = %f, Use Lyb = %d'%(zcut,UseLyb))
                 legend1 = "L < %d km/s" % (lmax)
                 legend2 = "L > %d km/s" % (lmin[0])
                 legend3 = "L > %d km/s" % (lmin[1])
@@ -1028,4 +1210,4 @@ def gridPlot():
 
 if __name__ == "__main__":
     
-    FvsZ()
+    StackVaryL()
