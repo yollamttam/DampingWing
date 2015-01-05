@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  19 DEC 2014 12:23
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  5 JAN 2015 15:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -251,7 +251,11 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 3.
 Package hyperref Warning: Option `pdftex' has already been used,
 (hyperref)                setting the option has no effect on input line 3.
 
-) (./update01092015.aux)
+) (./update01092015.aux
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
+)
 \openout1 = `update01092015.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
@@ -268,8 +272,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count110
 \scratchdimen=\dimen117
@@ -337,32 +340,64 @@ Overfull \hbox (42.39458pt too wide) in paragraph at lines 9--10
  [][] 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 15.
-[1
+<flux_ExcludeLs.png, id=6, 586.8324pt x 442.2924pt>
+File: flux_ExcludeLs.png Graphic file (type png)
+ <use flux_ExcludeLs.png>
+Package pdftex.def Info: flux_ExcludeLs.png used on input line 17.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./CompareTemplates.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 15.
-(./update01092015.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 15.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 15.
+<Stack_Zgreaterthan5.png, id=7, 586.8324pt x 442.2924pt>
+File: Stack_Zgreaterthan5.png Graphic file (type png)
+
+<use Stack_Zgreaterthan5.png>
+Package pdftex.def Info: Stack_Zgreaterthan5.png used on input line 18.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+LaTeX Font Info:    Try loading font information for U+msa on input line 19.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 19.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 24.
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./CompareTemplates.png> <.
+/flux_ExcludeLs.png> <./Stack_Zgreaterthan5.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 24.
+ (./update01092015.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 24.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 24.
 Package rerunfilecheck Info: File `update01092015.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 15.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 24.
  ) 
 Here is how much of TeX's memory you used:
- 5924 strings out of 495059
- 84302 string characters out of 3182030
- 159662 words of memory out of 3000000
- 9063 multiletter control sequences out of 15000+200000
- 4545 words of font info for 17 fonts, out of 3000000 for 9000
+ 5984 strings out of 495059
+ 85247 string characters out of 3182030
+ 163436 words of memory out of 3000000
+ 9099 multiletter control sequences out of 15000+200000
+ 9940 words of font info for 37 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,6n,26p,338b,321s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,7n,26p,953b,321s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on update01092015.pdf (1 page, 92793 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/symbols/msam10.pfb>
+Output written on update01092015.pdf (1 page, 230155 bytes).
 PDF statistics:
- 26 PDF objects out of 1000 (max. 8388607)
- 18 compressed objects within 1 object stream
- 4 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 PDF objects out of 1000 (max. 8388607)
+ 34 compressed objects within 1 object stream
+ 5 named destinations out of 1000 (max. 500000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

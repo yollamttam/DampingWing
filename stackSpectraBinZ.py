@@ -279,6 +279,38 @@ def FvsZ():
     plt.show(block=False)
     input("Press Enter to end program...")
 
+def FvsZ_ExcludeLs():
+    f,fbase,z = getAllFilenames()
+    nSpectra = len(f)
+    zcut = 1
+    Lminmin = 10
+    Lminmax = 1000
+    dLmin = 10
+    epsilon = 1e-10
+    Lminarray = np.arange(Lminmin,Lminmax+dLmin,dLmin)
+    counts = np.zeros(np.shape(Lminarray))+epsilon
+    pcounts = np.zeros(np.shape(Lminarray))+epsilon
+    tcounts = np.zeros(np.shape(Lminarray))+epsilon
+    fluxes = np.zeros(np.shape(Lminarray))
+    pfluxes = np.zeros(np.shape(Lminarray))
+    tfluxes = np.zeros(np.shape(Lminarray))
+    for i in range(0,nSpectra):
+        if (i != 4):
+            fluxes,counts,pfluxes,pcounts,tfluxes,tcounts = findMeanF_ExcludeLs(Lminarray,counts,fluxes,pcounts,pfluxes,tcounts,tfluxes,f[i],z[i],zcut)
+            
+    fluxes = fluxes/counts
+    pfluxes = pfluxes/pcounts
+    tfluxes = tfluxes/tcounts
+    plt.plot(Lminarray,fluxes)
+    plt.plot(Lminarray,pfluxes)
+    plt.plot(Lminarray,tfluxes)
+    plt.xlabel('$L_{min}$')
+    plt.ylabel('$<F|L<L_{min}>$')
+    plt.legend(['<F|L<L_{min}>','<F|flux>','<F>'])
+    plt.axis([0,1000,0.05,0.31])
+    plt.title('Mean Transmission Outside of Dark Gaps with L > Lmin')
+    plt.show(block=False)
+    input("Press Enter to end program...")
 
 def zDistributionOne(mFilename):
     mdata = np.genfromtxt(mFilename)
@@ -585,6 +617,112 @@ def oneStackBinZ(mFilename,z,largeCutoff,smallCutoff,zcut,t,Larray):
     
     print "%s contributed %d stacks..." % (mFilename,stackCount)
     return largeStackP,largeStackM,smallStackP,smallStackM,meansnr,Larray
+
+
+def findMeanF_ExcludeLs(Lminarray,counts,fluxes,pcounts,pfluxes,tcounts,tfluxes,mFilenameA,z,zcut):
+    print "this will not work if you are using Lyb..."
+    mFilenameB = mFilenameA
+    # print "There is a small bug in this code where it is possible that"
+    # print "we will neglect dark gaps that overlap with the positive edge"
+    # print "of our spectra..."
+    superSmallCutoff = 0 #km/s
+    largeCutoff = np.min(Lminarray)
+    t = 3
+    # load Lya fluxes and things from matrix
+    print mFilenameA,mFilenameB
+    mdataA = np.genfromtxt(mFilenameA)
+    zsA = mdataA[0,:]
+    fluxA = np.copy(mdataA[1,:])
+    sfluxA = np.copy(mdataA[1,:])
+    snrA = np.copy(mdataA[2,:])
+    meansnrA = np.mean(snrA)
+
+    # load Lyb information
+    mdataB = np.genfromtxt(mFilenameB)
+    zsB = mdataB[0,:]
+    fluxB = np.copy(mdataB[1,:])
+    sfluxB = np.copy(mdataB[1,:])
+    snrB = np.copy(mdataB[2,:])
+    meansnrB = np.mean(snrB)
+
+    #create variable that is velocity separation 
+    c = 3e5
+    lambdaA0 = 1216*(1+z)
+    lambdasA = 1216*(1+zsA)
+    lambdaB0 = 1026*(1+z)
+    lambdasB = 1026*(1+zsB)
+    vsA = c*(lambdaA0-lambdasA)/lambdaA0
+    vsB = c*(lambdaB0-lambdasB)/lambdaB0
+    
+    #create smoothed version of flux. 
+    smoothV = 50.0 #km/s
+    dvB = np.abs(vsB[1]-vsB[0])
+    dvA = np.abs(vsA[1]-vsA[0])
+    #print "apparently, resolution is %f km/s..."%(dv)
+    smoothn = np.ceil(smoothV/dvB)
+    #print "smoothing over %f pixels"%(smoothn)
+    
+    sfluxB = smoothSpectra(sfluxB,smoothn)
+    tsnr = snrB[:]*np.sqrt(2*smoothn)
+    tflux = sfluxB[:] - t/tsnr[:]
+    sfluxB[tflux<0] = 0
+
+    # ok, so now we actually need to iterate through spectra, stack
+    darkGap = 0
+    darkIndexReset = -999
+    darkIndex = darkIndexReset
+    nullValue = -999
+    vrange = 1000 #km/s
+    nrange = np.ceil(vrange/dvA) #number of pixels to stack
+    #we'll eventually need to interpolate onto a fixed grid here
+    vstack = np.arange(0,2000,dvA)
+    nrange = np.size(vstack)
+    nrangeB = np.round(nrange*dvA/dvB)
+    vgrid = np.arange(0,800,2)
+    largeCutoff = largeCutoff/dvB
+    superSmallCutoff = superSmallCutoff/dvB
+    fluxlength = np.size(fluxB)
+    #plt.plot(vs,sflux)
+    #plt.xlabel('v (km/s)')
+    #plt.ylabel('F_{unsmoothed}(v)')
+
+    zminA = np.min(zsA)
+    zmaxA = np.max(zsA)
+    
+    # for each pixel in the flux, we record the length of the dark gap that it is a part of
+    trackL = np.zeros(np.shape(fluxA))
+    
+    for i in range(0,fluxlength):
+        if (sfluxB[i] == 0):
+            darkGap = darkGap + 1
+            #mark beginning of dark gap
+            if (darkIndex == darkIndexReset):
+                darkIndex = i
+        if ((sfluxB[i] != 0) & (sfluxB[i-1]==0) & (i > 0)):
+            #stack in one direction, check for boundaries too
+            # if (darkGap >= largeCutoff):
+            Ldark = dvB*np.abs(darkIndex-i)
+            trackL[darkIndex:i] = Ldark
+                
+                    
+            darkGap = 0
+            darkIndex = darkIndexReset
+    
+    maxGap = np.max(trackL)
+    for i in range(0,np.shape(Lminarray)[0]):
+        Lmin = Lminarray[i]
+        if (maxGap >= Lmin):
+            tempFlux = np.mean(fluxA[trackL<Lmin])
+            fluxes[i] = fluxes[i] + tempFlux
+            counts[i] = counts[i] + 1
+            tempPflux = np.mean(fluxA[trackL==0])
+            pfluxes[i] = pfluxes[i] + tempPflux
+            pcounts[i] = pcounts[i] + 1
+            tempTflux = np.mean(fluxA)
+            tfluxes[i] = tfluxes[i] + tempTflux
+            tcounts[i] = tcounts[i] + 1
+            
+    return fluxes,counts,pfluxes,pcounts,tfluxes,tcounts
 
 
 def oneStackBinZLyb(mFilenameA,mFilenameB,z,largeCutoff,smallCutoff,zcut,t,Larray):
@@ -977,6 +1115,67 @@ def createTestFlux(flux):
         flux[i] = i*flux[i]
     return flux
 
+def stackMatrices(lmin,lmax,zcut,t,UseLyb):
+    #f,z = getFilenames()
+    # This will include files without real noise estimates
+    f,fbase,z = getAllFilenames()
+    fb,fbaseb,zb = getAllFilenamesLyb()
+    PLfit = 0
+    if (UseLyb == 0):
+        fb = f
+    nSpectra = len(f)
+    Larray = np.array([1,1])
+    for i in range(0,nSpectra):
+        if (PLfit):
+            fileBase, fileExt = os.path.splitext(f[i])
+            finput = "%s_PLfit%s" % (fileBase,fileExt)
+            fileBase, fileExt = os.path.splitext(fb[i])
+            fbinput = "%s_PLfit%s" % (fileBase,fileExt)
+        else:
+            finput = f[i]
+            fbinput = fb[i]
+        if (i != 4):
+            LP,LM,SP,SM,snr,Larray = oneStackBinZLyb(finput,fbinput,z[i],lmin,lmax,zcut,t,Larray)
+            # LP,LM,SP,SM,snr,Larray = oneStackBinZ(f[i],z[i],lmin,lmax,zcut,t,Larray)
+            ### fill in weighting matrix
+            print "SNR = %f"%(snr)
+            #snr = 1
+            fileBase, fileExt = os.path.splitext(fbase[i])
+            snrFile ="%s_snrEstimate%s" % (fileBase, fileExt)
+            snr = np.genfromtxt(snrFile)
+            print "snr = %f" % (snr)
+            #print "disabling weighted averaging..."
+            WLP = snr*np.ones(np.shape(LP)[0])
+            WLM = snr*np.ones(np.shape(LM)[0])
+            WSP = snr*np.ones(np.shape(SP)[0])
+            WSM = snr*np.ones(np.shape(SM)[0])
+
+            if (i == 0):
+                WLPfull = np.copy(WLP)
+                WLMfull = np.copy(WLM)
+                WSPfull = np.copy(WSP)
+                WSMfull = np.copy(WSM)
+                
+                LPfull = np.copy(LP)
+                LMfull = np.copy(LM)
+                SPfull = np.copy(SP)
+                SMfull = np.copy(SM)
+            else:
+                if (i != 1):
+                    WLPfull = np.hstack((WLPfull,WLP))
+                    WLMfull = np.hstack((WLMfull,WLM))
+                    WSPfull = np.hstack((WSPfull,WSP))
+                    WSMfull = np.hstack((WSMfull,WSM))
+
+                    LPfull = np.vstack((LPfull,LP))
+                    LMfull = np.vstack((LMfull,LM))
+                    SPfull = np.vstack((SPfull,SP))
+                    SMfull = np.vstack((SMfull,SM))
+
+    large,small,largeVar,smallVar = averageStacks(LPfull,LMfull,SPfull,SMfull,WLPfull,WLMfull,WSPfull,WSMfull)        
+    vs = 2*np.arange(0,np.shape(large)[0],1)
+    #print np.shape(LPfull),np.shape(SPfull)
+    return vs,LPfull,LMfull,SPfull,SMfull,large,small
 
 
 def fullStack(lmin,lmax,zcut,t,UseLyb):
@@ -1208,6 +1407,37 @@ def gridPlot():
     input("Press return to end...")
 
 
+def stepByStep():
+    # This will show, step by step, how the stacking proceeds.
+    lmin = 300
+    lmax = 500
+    UseLyb = 0
+    t = 3
+    zcut = 4.5
+    vs,LP,LM,SP,SM,large,small = stackMatrices(lmin,lmax,zcut,t,UseLyb)
+    LM = np.fliplr(LM)
+    SM = np.fliplr(SM)
+    L = np.vstack((LP,LM))
+    S = np.vstack((SP,SM))
+
+    nstacks = np.shape(L)[0]
+    spectraPerPlot = 5
+    onevs = vs[:]
+    for q in range(0,spectraPerPlot-1):
+        print np.shape(vs)
+        vs = np.vstack((vs,onevs))
+        print np.shape(vs)
+    for i in range(0,nstacks):
+        filename = "StepByStep_Frame%d.eps" % (i+1)
+        
+        mini = i*spectraPerPlot
+        maxi = mini+spectraPerPlot
+        print np.shape(vs),np.shape(L[mini:maxi,:])
+        plt.plot(L[mini:maxi,:])
+        plt.show(block=False)
+        input('Press return to continue...')
+
+
 if __name__ == "__main__":
     
-    StackVaryL()
+    stepByStep()

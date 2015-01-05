@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  19 DEC 2014 12:41
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  5 JAN 2015 12:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -251,8 +251,17 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 3.
 Package hyperref Warning: Option `pdftex' has already been used,
 (hyperref)                setting the option has no effect on input line 3.
 
+) (./update01092015_PLfits.aux
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
 )
-No file update01092015_PLfits.aux.
 \openout1 = `update01092015_PLfits.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
@@ -269,7 +278,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count110
 \scratchdimen=\dimen117
@@ -320,44 +329,55 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 3.
 LaTeX Info: Redefining \pageref on input line 3.
 LaTeX Info: Redefining \nameref on input line 3.
+
+(./update01092015_PLfits.out) (./update01092015_PLfits.out)
 \@outlinefile=\write3
 \openout3 = `update01092015_PLfits.out'.
 
+LaTeX Font Info:    Try loading font information for U+msa on input line 7.
 
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 7.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
 <z517_spec.png, id=4, 495.7722pt x 416.2752pt>
 File: z517_spec.png Graphic file (type png)
  <use z517_spec.png>
-Package pdftex.def Info: z517_spec.png used on input line 9.
+Package pdftex.def Info: z517_spec.png used on input line 11.
 (pdftex.def)             Requested size: 227.62204pt x 191.1205pt.
 
 <z521_spec.png, id=6, 502.2765pt x 416.2752pt>
 File: z521_spec.png Graphic file (type png)
  <use z521_spec.png>
-Package pdftex.def Info: z521_spec.png used on input line 10.
+Package pdftex.def Info: z521_spec.png used on input line 12.
 (pdftex.def)             Requested size: 227.62204pt x 188.64964pt.
 
 <z531_spec.png, id=7, 502.2765pt x 416.2752pt>
 File: z531_spec.png Graphic file (type png)
  <use z531_spec.png>
-Package pdftex.def Info: z531_spec.png used on input line 11.
+Package pdftex.def Info: z531_spec.png used on input line 13.
 (pdftex.def)             Requested size: 227.62204pt x 188.64964pt.
 
 <z541_spec.png, id=8, 502.2765pt x 416.2752pt>
 File: z541_spec.png Graphic file (type png)
  <use z541_spec.png>
-Package pdftex.def Info: z541_spec.png used on input line 12.
+Package pdftex.def Info: z541_spec.png used on input line 14.
 (pdftex.def)             Requested size: 227.62204pt x 188.64964pt.
 
 <z574.png, id=9, 506.6127pt x 416.2752pt>
 File: z574.png Graphic file (type png)
  <use z574.png>
-Package pdftex.def Info: z574.png used on input line 13.
+Package pdftex.def Info: z574.png used on input line 15.
 (pdftex.def)             Requested size: 227.62204pt x 187.02992pt.
 
 <z580.png, id=10, 506.6127pt x 416.2752pt>
 File: z580.png Graphic file (type png)
  <use z580.png>
-Package pdftex.def Info: z580.png used on input line 14.
+Package pdftex.def Info: z580.png used on input line 16.
 (pdftex.def)             Requested size: 227.62204pt x 187.02992pt.
 
 
@@ -366,37 +386,37 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <z582_hres_spec.png, id=11, 502.2765pt x 416.9979pt>
 File: z582_hres_spec.png Graphic file (type png)
  <use z582_hres_spec.png>
-Package pdftex.def Info: z582_hres_spec.png used on input line 21.
+Package pdftex.def Info: z582_hres_spec.png used on input line 23.
 (pdftex.def)             Requested size: 227.62204pt x 188.97716pt.
 
 <z582.png, id=12, 513.8397pt x 416.2752pt>
 File: z582.png Graphic file (type png)
  <use z582.png>
-Package pdftex.def Info: z582.png used on input line 22.
+Package pdftex.def Info: z582.png used on input line 24.
 (pdftex.def)             Requested size: 227.62204pt x 184.40025pt.
 
 <Q0836-spec.png, id=13, 502.2765pt x 416.2752pt>
 File: Q0836-spec.png Graphic file (type png)
  <use Q0836-spec.png>
-Package pdftex.def Info: Q0836-spec.png used on input line 23.
+Package pdftex.def Info: Q0836-spec.png used on input line 25.
 (pdftex.def)             Requested size: 227.62204pt x 188.64964pt.
 
 <z595.png, id=14, 506.6127pt x 416.2752pt>
 File: z595.png Graphic file (type png)
  <use z595.png>
-Package pdftex.def Info: z595.png used on input line 24.
+Package pdftex.def Info: z595.png used on input line 26.
 (pdftex.def)             Requested size: 227.62204pt x 187.02992pt.
 
 <z599_hres_spec.png, id=15, 495.7722pt x 416.9979pt>
 File: z599_hres_spec.png Graphic file (type png)
  <use z599_hres_spec.png>
-Package pdftex.def Info: z599_hres_spec.png used on input line 25.
+Package pdftex.def Info: z599_hres_spec.png used on input line 27.
 (pdftex.def)             Requested size: 227.62204pt x 191.4523pt.
 
 <z599.png, id=16, 495.7722pt x 416.2752pt>
 File: z599.png Graphic file (type png)
  <use z599.png>
-Package pdftex.def Info: z599.png used on input line 26.
+Package pdftex.def Info: z599.png used on input line 28.
 (pdftex.def)             Requested size: 227.62204pt x 191.1205pt.
 
 
@@ -405,38 +425,38 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <Q1306-spec.png, id=17, 495.7722pt x 416.2752pt>
 File: Q1306-spec.png Graphic file (type png)
  <use Q1306-spec.png>
-Package pdftex.def Info: Q1306-spec.png used on input line 33.
+Package pdftex.def Info: Q1306-spec.png used on input line 35.
 (pdftex.def)             Requested size: 227.62204pt x 191.1205pt.
 
 <z605.png, id=18, 495.7722pt x 416.2752pt>
 File: z605.png Graphic file (type png)
  <use z605.png>
-Package pdftex.def Info: z605.png used on input line 34.
+Package pdftex.def Info: z605.png used on input line 36.
 (pdftex.def)             Requested size: 227.62204pt x 191.1205pt.
 
 <z607.png, id=19, 506.6127pt x 416.2752pt>
 File: z607.png Graphic file (type png)
  <use z607.png>
-Package pdftex.def Info: z607.png used on input line 35.
+Package pdftex.def Info: z607.png used on input line 37.
 (pdftex.def)             Requested size: 227.62204pt x 187.02992pt.
 
 <z614.png, id=20, 506.6127pt x 416.2752pt>
 File: z614.png Graphic file (type png)
  <use z614.png>
-Package pdftex.def Info: z614.png used on input line 36.
+Package pdftex.def Info: z614.png used on input line 38.
 (pdftex.def)             Requested size: 227.62204pt x 187.02992pt.
 
 <z621.png, id=21, 510.9489pt x 416.2752pt>
 File: z621.png Graphic file (type png)
  <use z621.png>
-Package pdftex.def Info: z621.png used on input line 37.
+Package pdftex.def Info: z621.png used on input line 39.
 (pdftex.def)             Requested size: 227.62204pt x 185.44832pt.
 
 <qso_z_628_lo_res.png, id=22, 495.7722pt x 416.9979pt>
 File: qso_z_628_lo_res.png Graphic file (type png)
 
 <use qso_z_628_lo_res.png>
-Package pdftex.def Info: qso_z_628_lo_res.png used on input line 38.
+Package pdftex.def Info: qso_z_628_lo_res.png used on input line 40.
 (pdftex.def)             Requested size: 227.62204pt x 191.4523pt.
 
 
@@ -446,13 +466,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: qso_z_637_lo_res.png Graphic file (type png)
 
 <use qso_z_637_lo_res.png>
-Package pdftex.def Info: qso_z_637_lo_res.png used on input line 45.
+Package pdftex.def Info: qso_z_637_lo_res.png used on input line 47.
 (pdftex.def)             Requested size: 227.62204pt x 187.35461pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 51.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 53.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2 <./z517_spec.png> <./z5
@@ -460,39 +480,34 @@ Package atveryend Info: Empty hook `BeforeClearDocument' on input line 51.
 [3 <./z582_hres_spec.png> <./z582.png> <./Q0836-spec.png> <./z595.png> <./z599_
 hres_spec.png> <./z599.png>] [4 <./Q1306-spec.png> <./z605.png> <./z607.png> <.
 /z614.png> <./z621.png> <./qso_z_628_lo_res.png>] [5 <./qso_z_637_lo_res.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 51.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 53.
 
 (./update01092015_PLfits.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 51.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 51.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 53.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 53.
+Package rerunfilecheck Info: File `update01092015_PLfits.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
-Package rerunfilecheck Warning: File `update01092015_PLfits.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+LaTeX Warning: There were multiply-defined labels.
 
-Package rerunfilecheck Info: Checksums for `update01092015_PLfits.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 51.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 53.
  ) 
 Here is how much of TeX's memory you used:
- 6015 strings out of 495059
- 85667 string characters out of 3182030
- 162531 words of memory out of 3000000
- 9135 multiletter control sequences out of 15000+200000
- 4545 words of font info for 17 fonts, out of 3000000 for 9000
+ 6062 strings out of 495059
+ 86443 string characters out of 3182030
+ 162701 words of memory out of 3000000
+ 9158 multiletter control sequences out of 15000+200000
+ 8893 words of font info for 34 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,6n,26p,345b,323s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,6n,26p,345b,325s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on update01092015_PLfits.pdf (5 pages, 1278468 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on update01092015_PLfits.pdf (5 pages, 1291266 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 87 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  11 named destinations out of 1000 (max. 500000)
  96 words of extra memory for PDF output out of 10000 (max. 10000000)
 
