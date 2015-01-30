@@ -1,0 +1,58 @@
+function AllResolutionChanges()
+
+a = [
+'Q0836-spec_LyaMatrix.tex';
+'Q1306-spec_LyaMatrix.tex';
+'qso_z_628_lo_res_LyaMatrix.txt';
+'qso_z_637_lo_res_LyaMatrix.txt';
+'z517.spec_LyaMatrix.tex';
+'z521.spec_LyaMatrix.tex';
+'z531.spec_LyaMatrix.tex';
+'z541.spec_LyaMatrix.tex';
+'z574_LyaMatrix.tex';
+'z580_LyaMatrix.tex';
+'z582_hres.spec_LyaMatrix.tex';
+'z582_LyaMatrix.tex';
+'z595_LyaMatrix.tex';
+'z599_hres.spec_LyaMatrix.tex';
+'z599_LyaMatrix.tex';
+'z605_LyaMatrix.tex';
+'z607_LyaMatrix.tex';
+'z614_LyaMatrix.tex';
+'z621_LyaMatrix.tex';
+];
+
+filenames = cellstr(a)
+nfiles = length(filenames)
+
+zs = [
+5.82;
+5.99;
+6.28;
+6.37;
+5.17;
+5.21;
+5.31;
+5.41;
+5.74;
+5.80;
+5.82;
+5.82;
+5.95;
+5.99;
+5.99;
+6.05;
+6.07;
+6.14;
+6.21;
+];
+
+
+for i = 1:nfiles
+  
+  
+  
+  
+  
+  
+end

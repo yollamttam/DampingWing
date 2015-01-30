@@ -1,0 +1,12 @@
+The goal of my disseratation is to explore several avenues towards constraining a period in the evolution of the Universe known as the "Epoch of Reionization". This period corresponds to when the Universe was roughly half a billion to one billion years old and marks the transition when the Universe went from being a mostly-dark place to a place which hosted many sources of light such as galaxies and quasars. 
+
+This period of time also corresponds to when the gas in the Universe, almost entirely composed of hydrogen and helium, was ionized by the light from these light sources, i.e. the Epoch of Reionization (EoR). 
+
+One way to learn about this process is to study a specific type of emission from neutral hydrogen (the 21-cm line), which, in principle, could allow you to construct a movie-like history of when and how the hydrogen in the Universe was ionized. In March 2013, my adviser and I published a paper in the Astrophysical Journal titled "Identifying Ionized Regions in Noisy 21 cm Data Sets", which described how one could perform the initial steps towards this goal using currently-planned and next-generation experiments which aim to meaure this emission from intergalactic gas during the EoR. Additionally, I presented a poster on this topic at the "Intergalactic Interactions" conference in Edinburgh, UK during June of this year.
+
+Since publishing the paper, we have teamed up with a graduate student (Piyanat Kittiwisit) and professor (Judd Bowmann) at Arizona State University who work on the experimental side of the 21cm field. We have been working to develop approaches to constrain the EoR history which incorporate the noise and nuissances of an actual experiment much more realistically. 
+
+Additionally, my adviser and I have spent a lot of time this year developing approaches to utilize the "Lyman-alpha forest" to constrain the EoR. Basically, neutral hydrogen between us and extremely bright quasars that are present during the EoR will cause some frequencies of light from the quasars to be absorbed. We have developed a couple methods which utilize specific statistical properties of this absorption in order to constrain the progress of the EoR when the Universe was roughly a billion years old. Furthermore, our results suggest that this approach should be promising with existing data.
+
+We are currently writing the paper that describes these approaches, which should be submitted in early 2014. From there, we are aiming to team up with colleagues who have access to such data in order to put our approach into practice. 
+

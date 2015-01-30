@@ -1,0 +1,238 @@
+function [fluxA fluxACheck fluxB fluxBCheck] = SetSpectraResolution(zsim,LineProfile,fullion,toyin,coldHI,UseVP)
+FWHMhires = 6.7;
+FWHMmike = 13.6;
+sanitycheck = 0;
+if (sanitycheck == 1)
+  disp('YOU ARE DOING A SANITY CHECK RIGHT NOW BRO!');
+end
+disp('Assuming Npixels = 2556...');
+Npixels = 2556;
+T0 = 20000;
+SplitTau = 1;
+toy = toyin(1); 
+toyR = toyin(2);
+thermaltest = 0;
+Thermal = 1;
+
+
+%cite 1306.2314 for this:
+%HIRES FWHM = 6.7 km/s
+%MIKE FWHM = 13.6 km/s
+%HIRES vbin = 2.1 km/s
+%MIKE vbin = 5.0 km/s
+
+
+Omegam = .27;
+OmegaL = .73;
+z = 5.5;
+H = 100*sqrt(Omegam*(1+z)^3+OmegaL);
+dChi = 130/(Npixels-1);
+dV = H*dChi/(1+z);
+is = 1:1:Npixels;
+vs = dV*(is - 1);
+center = Npixels/2 + 1;
+
+%vbins for output spectra
+minv = min(vs); maxv = max(vs);
+vbinHIRES = 2.1;
+vbinMIKE = 5.0;
+vsHIRES = minv:vbinHIRES:maxv;
+vsMIKE = minv:vbinMIKE:maxv;
+
+%calculate our Gamma values once
+Fobs = 0.1; thermaltest = 0; SplitTau = 1;
+if (sanitycheck == 0)
+  Gamma = ScaleByGamma(Fobs,zsim,LineProfile,fullion,thermaltest,SplitTau,coldHI,UseVP);
+else
+  Gamma = ScaleByGamma(Fobs,zsim,LineProfile,fullion,thermaltest,SplitTau,0,UseVP);
+end
+FGlyaGamma = ScaleByGamma_FGlya(.31);
+
+%construct filter array
+sigmaHIRES = FWHMhires/2.355;
+sigmaMIKE = FWHMmike/2.355;
+dk = 2*pi/maxv;
+ks = (is-center)*dk; 
+HIRESfilter = exp(-ks.^2*sigmaHIRES^2/2);
+MIKEfilter = exp(-ks.^2*sigmaMIKE^2/2);
+
+Nspectra = 500; plotpick = 8000;
+for i = 1:Nspectra
+  %load up the taus you wanted...
+  [tauA tauACheck tauB tauBCheck Nlos] = FetchSpectra(zsim,LineProfile,fullion,toyin,Gamma,FGlyaGamma,coldHI,UseVP,i);
+
+  %we need fluxes
+  fluxA = exp(-tauA);
+  fluxACheck = exp(-tauACheck);
+  fluxB = exp(-tauB);
+  fluxBCheck = exp(-tauBCheck);
+  
+  %FOURIER TRANSFORM
+  FLUXA = fftshift(fft(fluxA));
+  FLUXACHECK = fftshift(fft(fluxACheck));
+  FLUXB = fftshift(fft(fluxB));
+  FLUXBCHECK = fftshift(fft(fluxBCheck));
+  
+  %apply filter for HIRES
+  FLUXAhires = HIRESfilter.*FLUXA;
+  FLUXACHECKhires = HIRESfilter.*FLUXACHECK;
+  FLUXBhires = HIRESfilter.*FLUXB;
+  FLUXBCHECKhires = HIRESfilter.*FLUXBCHECK;
+  
+  %apply filter for MIKE
+  FLUXAmike = MIKEfilter.*FLUXA;
+  FLUXACHECKmike = MIKEfilter.*FLUXACHECK;
+  FLUXBmike = MIKEfilter.*FLUXB;
+  FLUXBCHECKmike = MIKEfilter.*FLUXBCHECK;
+  
+  %inverse Fourier transform
+  fluxAHIRES = ifft(ifftshift(FLUXAhires));
+  fluxACheckHIRES = ifft(ifftshift(FLUXACHECKhires));
+  fluxBHIRES = ifft(ifftshift(FLUXBhires));
+  fluxBCheckHIRES = ifft(ifftshift(FLUXBCHECKhires));
+  fluxAMIKE = ifft(ifftshift(FLUXAmike));
+  fluxACheckMIKE = ifft(ifftshift(FLUXACHECKmike));
+  fluxBMIKE = ifft(ifftshift(FLUXBmike));
+  fluxBCheckMIKE = ifft(ifftshift(FLUXBCHECKmike));
+
+  %now we need to sparsely sample. 
+  fluxAHIRES = interp1(vs,fluxAHIRES,vsHIRES);
+  fluxACheckHIRES = interp1(vs,fluxACheckHIRES,vsHIRES);
+  fluxBHIRES = interp1(vs,fluxBHIRES,vsHIRES);
+  fluxBCheckHIRES = interp1(vs,fluxBCheckHIRES,vsHIRES);
+  fluxAMIKE = interp1(vs,fluxAMIKE,vsMIKE);
+  fluxACheckMIKE = interp1(vs,fluxACheckMIKE,vsMIKE);
+  fluxBMIKE = interp1(vs,fluxBMIKE,vsMIKE);
+  fluxBCheckMIKE = interp1(vs,fluxBCheckMIKE,vsMIKE);
+  
+  if (i == plotpick)
+    vlength = 100;
+    mini = 1; maxi = floor(vlength/dV);
+    miniH = 1; maxiH = floor(vlength/vbinHIRES);
+    miniM = 1; maxiM = floor(vlength/vbinMIKE);
+    figure; plot(vs(mini:maxi),fluxA(mini:maxi));
+    hold on; plot(vsHIRES(miniH:maxiH),fluxAHIRES(miniH:maxiH),'o','Color','red');
+    hold on; plot(vsMIKE(miniM:maxiM),fluxAMIKE(miniM:maxiM),'x','Color','black');
+    xlabel('v (km/s)'); ylabel('F');
+    legend('Original Spectra','HIRES Resolution','MIKE Resolution');
+  end
+  
+  %save files
+  cd ExperimentSpectra;
+  LookupHIRES = 'LookupTable_HIRES.txt';
+  fluxAfile = sprintf('HIRESspectra_LyA_z%d_LP%d_Thermal%d_FullIon%d_toyR%d_ColdHI%d_F%d_Nlos%d.txt',zsim,1,Thermal,fullion,toyR,coldHI,Fobs,Nlos);
+  fluxACheckfile = sprintf('HIRESspectra_LyA_z%d_LP%d_Thermal%d_FullIon%d_toyR%d_ColdHI%d_F%d_Nlos%d.txt',zsim,0,Thermal,fullion,toyR,coldHI,Fobs,Nlos);
+  fluxBfile = sprintf('HIRESspectra_LyB_z%d_LP%d_Thermal%d_FullIon%d_toyR%d_ColdHI%d_F%d_Nlos%d.txt',zsim,1,Thermal,fullion,toyR,coldHI,Fobs,Nlos);
+  fluxBCheckfile = sprintf('HIRESspectra_LyB_z%d_LP%d_Thermal%d_FullIon%d_toyR%d_ColdHI%d_F%d_Nlos%d.txt',zsim,0,Thermal,fullion,toyR,coldHI,Fobs,Nlos);
+  
+  if (sanitycheck == 1)
+    [pathstr, name, ext, versn] = fileparts(fluxAfile);
+    fluxAfile = sprintf('%s_DELETE.txt',name);
+    [pathstr, name, ext, versn] = fileparts(fluxACheckfile);
+    fluxACheckfile = sprintf('%s_DELETE.txt',name);
+    [pathstr, name, ext, versn] = fileparts(fluxBfile);
+    fluxBfile = sprintf('%s_DELETE.txt',name);
+    [pathstr, name, ext, versn] = fileparts(fluxBCheckfile);
+    fluxBCheckfile = sprintf('%s_DELETE.txt',name);
+  end
+  
+  if (UseVP == 1)
+    [pathstr, name, ext, versn] = fileparts(LookupHIRES);
+    LookupHIRES = sprintf('%s_linvp%d.txt',name,UseVP);
+    [pathstr, name, ext, versn] = fileparts(fluxAfile);
+    fluxAfile = sprintf('%s_linvp%d.txt',name,UseVP);
+    [pathstr, name, ext, versn] = fileparts(fluxACheckfile);
+    fluxACheckfile = sprintf('%s_linvp%d.txt',name,UseVP);
+    [pathstr, name, ext, versn] = fileparts(fluxBfile);
+    fluxBfile = sprintf('%s_linvp%d.txt',name,UseVP);
+    [pathstr, name, ext, versn] = fileparts(fluxBCheckfile);
+    fluxBCheckfile = sprintf('%s_linvp%d.txt',name,UseVP);
+  end
+  
+  fid = fopen(LookupHIRES,'a');
+  dlmwrite(LookupHIRES,[i Nlos],'-append');
+  fclose(fid);
+    
+  fid = fopen(fluxAfile,'w');
+  dlmwrite(fluxAfile,fluxAHIRES,'precision',6);
+  fclose(fid);
+  fid = fopen(fluxACheckfile,'w');
+  dlmwrite(fluxACheckfile,fluxACheckHIRES,'precision',6);
+  fclose(fid);
+  fid = fopen(fluxBfile,'w');
+  dlmwrite(fluxBfile,fluxBHIRES,'precision',6);
+  fclose(fid);
+  fid = fopen(fluxBCheckfile,'w');
+  dlmwrite(fluxBCheckfile,fluxBCheckHIRES,'precision',6);
+  fclose(fid);
+  
+   LookupMIKE = 'LookupTable_MIKE.txt';
+  fluxAfile = sprintf('MIKEspectra_LyA_z%d_LP%d_Thermal%d_FullIon%d_toyR%d_ColdHI%d_F%d_Nlos%d.txt',zsim,1,Thermal,fullion,toyR,coldHI,Fobs,Nlos);
+  fluxACheckfile = sprintf('MIKEspectra_LyA_z%d_LP%d_Thermal%d_FullIon%d_toyR%d_ColdHI%d_F%d_Nlos%d.txt',zsim,0,Thermal,fullion,toyR,coldHI,Fobs,Nlos);
+  fluxBfile = sprintf('MIKEspectra_LyB_z%d_LP%d_Thermal%d_FullIon%d_toyR%d_ColdHI%d_F%d_Nlos%d.txt',zsim,1,Thermal,fullion,toyR,coldHI,Fobs,Nlos);
+  fluxBCheckfile = sprintf('MIKEspectra_LyB_z%d_LP%d_Thermal%d_FullIon%d_toyR%d_ColdHI%d_F%d_Nlos%d.txt',zsim,0,Thermal,fullion,toyR,coldHI,Fobs,Nlos);
+ 
+  if (sanitycheck == 1)
+    [pathstr, name, ext, versn] = fileparts(fluxAfile);
+    fluxAfile = sprintf('%s_DELETE.txt',name);
+    [pathstr, name, ext, versn] = fileparts(fluxACheckfile);
+    fluxACheckfile = sprintf('%s_DELETE.txt',name);
+    [pathstr, name, ext, versn] = fileparts(fluxBfile);
+    fluxBfile = sprintf('%s_DELETE.txt',name);
+    [pathstr, name, ext, versn] = fileparts(fluxBCheckfile);
+    fluxBCheckfile = sprintf('%s_DELETE.txt',name);
+  end
+  
+  if (UseVP == 1)
+    [pathstr, name, ext, versn] = fileparts(LookupMIKE);
+    LookupMIKE = sprintf('%s_linvp%d.txt',name,UseVP);
+    [pathstr, name, ext, versn] = fileparts(fluxAfile);
+    fluxAfile = sprintf('%s_linvp%d.txt',name,UseVP);
+    [pathstr, name, ext, versn] = fileparts(fluxACheckfile);
+    fluxACheckfile = sprintf('%s_linvp%d.txt',name,UseVP);
+    [pathstr, name, ext, versn] = fileparts(fluxBfile);
+    fluxBfile = sprintf('%s_linvp%d.txt',name,UseVP);
+    [pathstr, name, ext, versn] = fileparts(fluxBCheckfile);
+    fluxBCheckfile = sprintf('%s_linvp%d.txt',name,UseVP);
+  end
+  
+  fid = fopen(LookupMIKE,'a');
+  dlmwrite(LookupMIKE,[i Nlos],'-append');
+  fclose(fid);
+    
+  fid = fopen(fluxAfile,'w');
+  dlmwrite(fluxAfile,fluxAMIKE,'precision',6);
+  fclose(fid);
+  fid = fopen(fluxACheckfile,'w');
+  dlmwrite(fluxACheckfile,fluxACheckMIKE,'precision',6);
+  fclose(fid);
+  fid = fopen(fluxBfile,'w');
+  dlmwrite(fluxBfile,fluxBMIKE,'precision',6);
+  fclose(fid);
+  fid = fopen(fluxBCheckfile,'w');
+  dlmwrite(fluxBCheckfile,fluxBCheckMIKE,'precision',6);
+  fclose(fid);
+  
+    
+  if (i == 1)
+    vfileHIRES = 'HIRES_Vs.txt';
+    vfileMIKE = 'MIKE_Vs.txt';
+    fid = fopen(vfileHIRES,'w');
+    dlmwrite(vfileHIRES,vsHIRES);
+    fclose(fid);
+    fid = fopen(vfileMIKE,'w');
+    dlmwrite(vfileMIKE,vsMIKE);
+    fclose(fid);
+  end
+  
+  cd ../
+  
+  
+end
+
+if (sanitycheck == 1)
+  disp('YOU ARE DOING A SANITY CHECK RIGHT NOW BRO!');
+end
+
+
+end

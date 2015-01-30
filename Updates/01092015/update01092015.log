@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  5 JAN 2015 15:46
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  26 JAN 2015 12:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -253,6 +253,21 @@ Package hyperref Warning: Option `pdftex' has already been used,
 
 ) (./update01092015.aux
 
+LaTeX Warning: Label `fig:regrid' multiply defined.
+
+
+LaTeX Warning: Label `fig:regrid' multiply defined.
+
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
+
 LaTeX Warning: Label `fig:todo' multiply defined.
 
 )
@@ -329,75 +344,173 @@ LaTeX Info: Redefining \nameref on input line 3.
 \openout3 = `update01092015.out'.
 
 
-<CompareTemplates.png, id=4, 1453.3497pt x 294.1389pt>
-File: CompareTemplates.png Graphic file (type png)
+<gridPlot.png, id=4, 1734.48pt x 875.9124pt>
+File: gridPlot.png Graphic file (type png)
+ <use gridPlot.png>
+Package pdftex.def Info: gridPlot.png used on input line 10.
+(pdftex.def)             Requested size: 569.05511pt x 287.36795pt.
 
-<use CompareTemplates.png>
-Package pdftex.def Info: CompareTemplates.png used on input line 9.
-(pdftex.def)             Requested size: 512.1496pt x 103.6503pt.
-
-Overfull \hbox (42.39458pt too wide) in paragraph at lines 9--10
+Overfull \hbox (99.3001pt too wide) in paragraph at lines 10--11
  [][] 
  []
 
-<flux_ExcludeLs.png, id=6, 586.8324pt x 442.2924pt>
-File: flux_ExcludeLs.png Graphic file (type png)
- <use flux_ExcludeLs.png>
-Package pdftex.def Info: flux_ExcludeLs.png used on input line 17.
-(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
-
-<Stack_Zgreaterthan5.png, id=7, 586.8324pt x 442.2924pt>
-File: Stack_Zgreaterthan5.png Graphic file (type png)
-
-<use Stack_Zgreaterthan5.png>
-Package pdftex.def Info: Stack_Zgreaterthan5.png used on input line 18.
-(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 19.
-
+LaTeX Font Info:    Try loading font information for U+msa on input line 11.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 19.
+LaTeX Font Info:    Try loading font information for U+msb on input line 11.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 24.
- [1
+<gridPlot_noZ599.png, id=6, 1171.4967pt x 719.8092pt>
+File: gridPlot_noZ599.png Graphic file (type png)
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./CompareTemplates.png> <.
-/flux_ExcludeLs.png> <./Stack_Zgreaterthan5.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 24.
+<use gridPlot_noZ599.png>
+Package pdftex.def Info: gridPlot_noZ599.png used on input line 17.
+(pdftex.def)             Requested size: 569.05511pt x 349.6562pt.
+
+Overfull \hbox (99.3001pt too wide) in paragraph at lines 17--18
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<gridPlot_UseLyb.png, id=9, 1091.277pt x 643.203pt>
+File: gridPlot_UseLyb.png Graphic file (type png)
+ <use gridPlot_UseLyb.png>
+Package pdftex.def Info: gridPlot_UseLyb.png used on input line 24.
+(pdftex.def)             Requested size: 569.05511pt x 335.40967pt.
+
+Overfull \hbox (99.3001pt too wide) in paragraph at lines 24--25
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<gridPlot_noZ599_UseLyb.png, id=12, 1305.1962pt x 583.2189pt>
+File: gridPlot_noZ599_UseLyb.png Graphic file (type png)
+
+<use gridPlot_noZ599_UseLyb.png>
+Package pdftex.def Info: gridPlot_noZ599_UseLyb.png used on input line 31.
+(pdftex.def)             Requested size: 569.05511pt x 254.27663pt.
+
+Overfull \hbox (99.3001pt too wide) in paragraph at lines 31--32
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<NewWeighting_ErrorBars.png, id=15, 586.8324pt x 442.2924pt>
+File: NewWeighting_ErrorBars.png Graphic file (type png)
+
+<use NewWeighting_ErrorBars.png>
+Package pdftex.def Info: NewWeighting_ErrorBars.png used on input line 38.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<CountsVsZ.png, id=16, 586.8324pt x 442.2924pt>
+File: CountsVsZ.png Graphic file (type png)
+ <use CountsVsZ.png>
+Package pdftex.def Info: CountsVsZ.png used on input line 47.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+
+<WeightingVsZ.png, id=17, 586.8324pt x 442.2924pt>
+File: WeightingVsZ.png Graphic file (type png)
+ <use WeightingVsZ.png>
+Package pdftex.def Info: WeightingVsZ.png used on input line 48.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<NcontributionsVsZ_1200min.png, id=22, 586.8324pt x 442.2924pt>
+File: NcontributionsVsZ_1200min.png Graphic file (type png)
+
+<use NcontributionsVsZ_1200min.png>
+Package pdftex.def Info: NcontributionsVsZ_1200min.png used on input line 55.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+
+<ThresholdVsZ_1200min.png, id=23, 586.8324pt x 442.2924pt>
+File: ThresholdVsZ_1200min.png Graphic file (type png)
+
+<use ThresholdVsZ_1200min.png>
+Package pdftex.def Info: ThresholdVsZ_1200min.png used on input line 56.
+(pdftex.def)             Requested size: 227.62204pt x 171.55525pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<NoisePlot.png, id=26, 578.16pt x 433.62pt>
+File: NoisePlot.png Graphic file (type png)
+ <use NoisePlot.png>
+Package pdftex.def Info: NoisePlot.png used on input line 91.
+(pdftex.def)             Requested size: 398.33858pt x 298.75482pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<CompareTemplates.png, id=27, 1453.3497pt x 294.1389pt>
+File: CompareTemplates.png Graphic file (type png)
+
+<use CompareTemplates.png>
+Package pdftex.def Info: CompareTemplates.png used on input line 98.
+(pdftex.def)             Requested size: 512.1496pt x 103.6503pt.
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 98--99
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 103.
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./gridPlot.png>]
+[2 <./gridPlot_noZ599.png>] [3 <./gridPlot_UseLyb.png>] [4 <./gridPlot_noZ599_U
+seLyb.png> <./NewWeighting_ErrorBars.png>] [5 <./CountsVsZ.png> <./WeightingVsZ
+.png> <./NcontributionsVsZ_1200min.png> <./ThresholdVsZ_1200min.png>] [6 <./Noi
+sePlot.png> <./CompareTemplates.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 103.
  (./update01092015.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 24.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 24.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 103.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 103.
 Package rerunfilecheck Info: File `update01092015.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 24.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 103.
  ) 
 Here is how much of TeX's memory you used:
- 5984 strings out of 495059
- 85247 string characters out of 3182030
- 163436 words of memory out of 3000000
- 9099 multiletter control sequences out of 15000+200000
- 9940 words of font info for 37 fonts, out of 3000000 for 9000
+ 6032 strings out of 495059
+ 86237 string characters out of 3182030
+ 171646 words of memory out of 3000000
+ 9129 multiletter control sequences out of 15000+200000
+ 9239 words of font info for 35 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 36i,7n,26p,953b,321s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,9n,26p,1619b,325s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/symbols/msam10.pfb>
-Output written on update01092015.pdf (1 page, 230155 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmti10.pfb>
+Output written on update01092015.pdf (6 pages, 1755241 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 120 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
+ 17 named destinations out of 1000 (max. 500000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
