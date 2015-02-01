@@ -1,12 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.25)  28 JAN 2015 14:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.16)  1 FEB 2015 14:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **update02022015.tex
 (./update02022015.tex
 LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, lo
-aded.
+Babel <3.9h> and hyphenation patterns for 4 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
@@ -27,7 +26,7 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 Package: matt 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2000/07/18 v2.13 AMS math features
+Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
@@ -47,20 +46,20 @@ Package: amsbsy 1999/11/29 v1.2d
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count87
-LaTeX Info: Redefining \frac on input line 211.
+LaTeX Info: Redefining \frac on input line 210.
 \uproot@=\count88
 \leftroot@=\count89
-LaTeX Info: Redefining \overline on input line 307.
+LaTeX Info: Redefining \overline on input line 306.
 \classnum@=\count90
 \DOTSCASE@=\count91
-LaTeX Info: Redefining \ldots on input line 379.
-LaTeX Info: Redefining \dots on input line 382.
-LaTeX Info: Redefining \cdots on input line 467.
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
 \Mathstrutbox@=\box26
 \strutbox@=\box27
 \big@size=\dimen105
-LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \macc@depth=\count92
 \c@MaxMatrixCols=\count93
 \dotsspace@=\muskip10
@@ -81,18 +80,18 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 \multlinegap=\skip44
 \multlinetaggap=\skip45
 \mathdisplay@stack=\toks18
-LaTeX Info: Redefining \[ on input line 2666.
-LaTeX Info: Redefining \] on input line 2667.
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2009/06/22 v3.00
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
 Package: fullpage 1999/02/23 1.1 (PWD)
@@ -135,7 +134,7 @@ Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
 \@enLab=\toks20
 )
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2012/05/13 v6.82q Hypertext links for LaTeX
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
@@ -185,6 +184,9 @@ Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
@@ -193,39 +195,40 @@ Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 \Hy@pagecounter=\count101
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2012/05/13 v6.82q Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 )
 \Hy@SavedSpaceFactor=\count102
 
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Hyper figures OFF on input line 4062.
-Package hyperref Info: Link nesting OFF on input line 4067.
-Package hyperref Info: Hyper index ON on input line 4070.
-Package hyperref Info: Plain pages OFF on input line 4077.
-Package hyperref Info: Backreferencing OFF on input line 4082.
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4300.
+Package hyperref Info: Bookmarks ON on input line 4688.
 \c@Hy@tempcnt=\count103
 
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
-Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4653.
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen115
 \Fld@menulength=\count104
-\Field@Width=\dimen115
-\Fld@charsize=\dimen116
-Package hyperref Info: Hyper figures OFF on input line 5773.
-Package hyperref Info: Link nesting OFF on input line 5778.
-Package hyperref Info: Hyper index ON on input line 5781.
-Package hyperref Info: backreferencing OFF on input line 5788.
-Package hyperref Info: Link coloring OFF on input line 5793.
-Package hyperref Info: Link coloring with OCG OFF on input line 5798.
-Package hyperref Info: PDF/A mode OFF on input line 5803.
-LaTeX Info: Redefining \ref on input line 5843.
-LaTeX Info: Redefining \pageref on input line 5847.
+\Field@Width=\dimen116
+\Fld@charsize=\dimen117
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
 \Hy@abspage=\count105
 \c@Item=\count106
 \c@Hfootnote=\count107
@@ -234,7 +237,7 @@ LaTeX Info: Redefining \pageref on input line 5847.
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2012/05/13 v6.82q Hyperref driver for pdfTeX
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
 \Fld@listcount=\count108
 \c@bookmark@seq@number=\count109
 
@@ -252,6 +255,18 @@ Package hyperref Warning: Option `pdftex' has already been used,
 (hyperref)                setting the option has no effect on input line 3.
 
 ) (./update02022015.aux
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
+
+LaTeX Warning: Label `fig:todo' multiply defined.
+
 
 LaTeX Warning: Label `fig:todo' multiply defined.
 
@@ -278,13 +293,13 @@ LaTeX Font Info:    ... okay on input line 3.
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count110
-\scratchdimen=\dimen117
+\scratchdimen=\dimen118
 \scratchbox=\box28
 \nofMPsegments=\count111
 \nofMParguments=\count112
 \everyMPshowfont=\toks21
 \MPscratchCnt=\count113
-\MPscratchDim=\dimen118
+\MPscratchDim=\dimen119
 \MPnumerator=\count114
 \makeMPintoPDFobject=\count115
 \everyMPtoPDFconversion=\toks22
@@ -316,7 +331,7 @@ Package color Info: Driver file: pdftex.def on input line 130.
 Package hyperref Info: Link coloring ON on input line 3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
@@ -332,129 +347,202 @@ LaTeX Info: Redefining \nameref on input line 3.
 \openout3 = `update02022015.out'.
 
 
-<gridPlot_CommonRes.png, id=4, 1008.8892pt x 629.4717pt>
+<ToyFlux_RealNoise.png, id=4, 1442.5092pt x 367.8543pt>
+File: ToyFlux_RealNoise.png Graphic file (type png)
+
+<use ToyFlux_RealNoise.png>
+Package pdftex.def Info: ToyFlux_RealNoise.png used on input line 9.
+(pdftex.def)             Requested size: 512.1496pt x 130.60321pt.
+
+<ToySpectrum_StackingLocations.png, id=6, 1447.5681pt x 294.1389pt>
+File: ToySpectrum_StackingLocations.png Graphic file (type png)
+
+<use ToySpectrum_StackingLocations.png>
+Package pdftex.def Info: ToySpectrum_StackingLocations.png used on input line 1
+0.
+(pdftex.def)             Requested size: 512.1496pt x 104.06322pt.
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 9--11
+ [][] 
+ []
+
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 9--11
+ [] 
+ []
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 11.
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 11.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+<ToySpectrum_StackingLocations_HiNoise.png, id=7, 1216.3041pt x 294.1389pt>
+File: ToySpectrum_StackingLocations_HiNoise.png Graphic file (type png)
+
+<use ToySpectrum_StackingLocations_HiNoise.png>
+Package pdftex.def Info: ToySpectrum_StackingLocations_HiNoise.png used on inpu
+t line 17.
+(pdftex.def)             Requested size: 512.1496pt x 123.85614pt.
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 17--18
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<GridPlot_Debugged.png, id=8, 1445.4pt x 737.8767pt>
+File: GridPlot_Debugged.png Graphic file (type png)
+
+<use GridPlot_Debugged.png>
+Package pdftex.def Info: GridPlot_Debugged.png used on input line 24.
+(pdftex.def)             Requested size: 512.1496pt x 261.44702pt.
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 24--25
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<GridPlot_Debugged_No10.png, id=9, 1445.4pt x 737.8767pt>
+File: GridPlot_Debugged_No10.png Graphic file (type png)
+
+<use GridPlot_Debugged_No10.png>
+Package pdftex.def Info: GridPlot_Debugged_No10.png used on input line 31.
+(pdftex.def)             Requested size: 512.1496pt x 261.44702pt.
+
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 31--32
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<gridPlot_CommonRes.png, id=10, 1008.8892pt x 629.4717pt>
 File: gridPlot_CommonRes.png Graphic file (type png)
 
 <use gridPlot_CommonRes.png>
-Package pdftex.def Info: gridPlot_CommonRes.png used on input line 9.
+Package pdftex.def Info: gridPlot_CommonRes.png used on input line 39.
 (pdftex.def)             Requested size: 512.1496pt x 319.53755pt.
 
-Overfull \hbox (42.39458pt too wide) in paragraph at lines 9--10
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 39--40
  [][] 
  []
 
-<gridPlot_CommonRes_AllSpectra.png, id=6, 1038.5199pt x 659.1024pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<gridPlot_CommonRes_AllSpectra.png, id=11, 1038.5199pt x 659.1024pt>
 File: gridPlot_CommonRes_AllSpectra.png Graphic file (type png)
 
 <use gridPlot_CommonRes_AllSpectra.png>
-Package pdftex.def Info: gridPlot_CommonRes_AllSpectra.png used on input line 1
+Package pdftex.def Info: gridPlot_CommonRes_AllSpectra.png used on input line 4
 6.
 (pdftex.def)             Requested size: 512.1496pt x 325.03476pt.
 
-Overfull \hbox (42.39458pt too wide) in paragraph at lines 16--17
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 46--47
  [][] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 22.
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2009/06/22 v3.00 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 22.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)
-<z599_Spectra.png, id=7, 1183.0599pt x 294.1389pt>
+<z599_Spectra.png, id=12, 1183.0599pt x 294.1389pt>
 File: z599_Spectra.png Graphic file (type png)
  <use z599_Spectra.png>
-Package pdftex.def Info: z599_Spectra.png used on input line 24.
+Package pdftex.def Info: z599_Spectra.png used on input line 54.
 (pdftex.def)             Requested size: 512.1496pt x 127.33899pt.
 
-<z599_NoiseSignificance.png, id=8, 1125.9666pt x 294.1389pt>
+<z599_NoiseSignificance.png, id=13, 1125.9666pt x 294.1389pt>
 File: z599_NoiseSignificance.png Graphic file (type png)
 
 <use z599_NoiseSignificance.png>
-Package pdftex.def Info: z599_NoiseSignificance.png used on input line 25.
+Package pdftex.def Info: z599_NoiseSignificance.png used on input line 55.
 (pdftex.def)             Requested size: 512.1496pt x 133.793pt.
 
-Overfull \hbox (42.39458pt too wide) in paragraph at lines 24--26
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 54--56
  [] 
  []
 
 
-Overfull \hbox (42.39458pt too wide) in paragraph at lines 24--26
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 54--56
  [] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<z628_Spectra.png, id=9, 1377.4662pt x 320.1561pt>
+<z628_Spectra.png, id=14, 1377.4662pt x 320.1561pt>
 File: z628_Spectra.png Graphic file (type png)
  <use z628_Spectra.png>
-Package pdftex.def Info: z628_Spectra.png used on input line 33.
+Package pdftex.def Info: z628_Spectra.png used on input line 63.
 (pdftex.def)             Requested size: 512.1496pt x 119.03723pt.
 
-<z628_NoiseSignificance.png, id=10, 1378.9116pt x 320.1561pt>
+<z628_NoiseSignificance.png, id=15, 1378.9116pt x 320.1561pt>
 File: z628_NoiseSignificance.png Graphic file (type png)
 
 <use z628_NoiseSignificance.png>
-Package pdftex.def Info: z628_NoiseSignificance.png used on input line 34.
+Package pdftex.def Info: z628_NoiseSignificance.png used on input line 64.
 (pdftex.def)             Requested size: 512.1496pt x 118.91022pt.
 
-Overfull \hbox (42.39458pt too wide) in paragraph at lines 33--35
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 63--65
  [] 
  []
 
 
-Overfull \hbox (42.39458pt too wide) in paragraph at lines 33--35
+Overfull \hbox (42.39458pt too wide) in paragraph at lines 63--65
  [] 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 41.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 71.
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./gridPlot_CommonRes.png>]
- [2 <./gridPlot_CommonRes_AllSpectra.png>] [3 <./z599_Spectra.png> <./z599_Nois
-eSignificance.png>] [4 <./z628_Spectra.png> <./z628_NoiseSignificance.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 41.
-
-(./update02022015.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 41.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 41.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./ToyFlux_RealNoise.png> <
+./ToySpectrum_StackingLocations.png>] [2 <./ToySpectrum_StackingLocations_HiNoi
+se.png> <./GridPlot_Debugged.png>] [3 <./GridPlot_Debugged_No10.png>]
+[4 <./gridPlot_CommonRes.png>] [5 <./gridPlot_CommonRes_AllSpectra.png>]
+[6 <./z599_Spectra.png> <./z599_NoiseSignificance.png>] [7 <./z628_Spectra.png>
+ <./z628_NoiseSignificance.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 71.
+ (./update02022015.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 71.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 71.
 Package rerunfilecheck Info: File `update02022015.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 41.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 71.
  ) 
 Here is how much of TeX's memory you used:
- 6007 strings out of 495059
- 85770 string characters out of 3182030
- 163372 words of memory out of 3000000
- 9111 multiletter control sequences out of 15000+200000
- 10248 words of font info for 38 fonts, out of 3000000 for 9000
- 14 hyphenation exceptions out of 8191
- 36i,7n,26p,657b,325s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 6151 strings out of 494985
+ 88518 string characters out of 6180355
+ 169605 words of memory out of 5000000
+ 9274 multiletter control sequences out of 15000+600000
+ 10248 words of font info for 38 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 36i,7n,28p,782b,329s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmti8.pfb>
-Output written on update02022015.pdf (4 pages, 800696 bytes).
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmti8.pfb>
+Output written on update02022015.pdf (7 pages, 1567497 bytes).
 PDF statistics:
- 77 PDF objects out of 1000 (max. 8388607)
- 50 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 111 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
+ 19 named destinations out of 1000 (max. 500000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
