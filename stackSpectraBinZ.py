@@ -817,6 +817,7 @@ def oneStackBinZLyb(mFilenameA,mFilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
     #print "of our spectra..."
     superSmallCutoff = 0 #km/s
     testingStack = 0
+    requireLyab = 1
     # load Lya fluxes and things from matrix
     print mFilenameA,mFilenameB
     mdataA = np.genfromtxt(mFilenameA)
@@ -852,6 +853,7 @@ def oneStackBinZLyb(mFilenameA,mFilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
     
 
     # create smoothed version of flux. 
+    # threshold smoothed flux based on dark-pixel criteria
     smoothV = 50.0 #km/s
     # Lya
     smoothnA = np.ceil(smoothV/dvA)    
@@ -861,11 +863,11 @@ def oneStackBinZLyb(mFilenameA,mFilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
     sfluxA[tfluxA<0] = 0
     # Lyb
     smoothnB = np.ceil(smoothV/dvB)        
-    tsnrB = np.copy(snrB)*np.sqrt(2*smoothn)
+    tsnrB = np.copy(snrB)*np.sqrt(2*smoothnB)
     tfluxB = np.copy(sfluxB) - t/np.copy(tsnrB)
     sfluxB = smoothSpectra(sfluxB,smoothnB)
-    sfluxB[tfluxB<0] = 0    
-        
+    sfluxB[tfluxB<0] = 0 
+            
     sigmaT = np.mean(t/np.copy(tsnrB))
     
     plots = 0
@@ -883,7 +885,6 @@ def oneStackBinZLyb(mFilenameA,mFilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
         sfluxB = np.copy(fluxB)
         print np.shape(fluxB)
 
-        
     #ok, so now we actually need to iterate through spectra, stack
     stackCount = 0
     bigStackCount = 0
@@ -913,7 +914,7 @@ def oneStackBinZLyb(mFilenameA,mFilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
 
     zminA = np.min(zsA)
     zmaxA = np.max(zsA)
-
+    
     for i in range(0,fluxlength):
         if (sfluxB[i] == 0):
             darkGap = darkGap + 1
@@ -921,199 +922,213 @@ def oneStackBinZLyb(mFilenameA,mFilenameB,z,largeCutoff,smallCutoff,zcut,t,Larra
             if (darkIndex == darkIndexReset):
                 darkIndex = i
         if ((sfluxB[i] != 0) & (sfluxB[i-1]==0) & (i > 0)):
-            #stack in one direction, check for boundaries too
-            if (darkGap >= largeCutoff):
-                stackCount = stackCount + 1
+            # OK, so maybe we should first check if the dark 
+            # gap has Lya coverage.
+            # ---> If so, is it absorbed in Lya? Make this
+            #      a requirement. Call this doubleDark
+            doubleDark = 1
+            zDGmin = zsB[darkIndex]
+            zDGmax = zsB[i]
+            if (zDGmin > zDGmax):
+                temp = np.copy(zDGmin)
+                zDGmin = np.copy(zDGmax)
+                zDGmax = np.copy(temp)
+            # check for any overlap with Lya
+            condition1 = zmaxA > zDGmin
+            condition2 = zminA < zDGmax
+            if (condition1&condition2):
+                # we have some overlap
+                # find largest z of overlap
+                zupper = np.min((zDGmax,zmaxA))
+                zlower = np.max((zDGmin,zminA))
+                miniA = np.size(zsA[zsA<=zlower])-1
+                maxiA = np.size(zsA[zsA<=zupper])-1
                 
-                # contributes to large stack
-                #need to stack at both edges
-                
-                #positive stack
-
-                # OK, so here we probably have to do some thinking
-                mini = i
-                maxi = i + nrangeB
-                plus = nullValue*np.ones(nrange)
-                if (maxi >= fluxlength):
-                    maxi = (fluxlength - 1)
-                zminB = zsB[mini]
-                zmaxB = zsB[maxi]
-
-
-                #check if able to stack
-                if ((zminB>=zminA)&(zminB<zmaxA)):
-                    miniA = np.size(zsA[zsA<=zminB])-1
-                    maxiA = miniA + nrange 
-                    beginning = 0
-                    if (maxiA >= np.size(fluxA)):
-                        maxiA = np.size(fluxA) - 1
-                    nextent = maxiA-miniA
-                 
-                else:
-                    nextent = 0
-                    print "should this error have happened?"
-                
-
-                # if (nextent>=nrange):
-                #    nextent = nrange-1
-                if (nextent > 0):
-                    condition1 = (zcut>0)&(zsB[mini]>=zcut)
-                    condition2 = (zcut<0)&(zsB[mini]<=np.abs(zcut))
-                    
-                    if (condition1 | condition2):
-                        plus[0:nextent] = fluxA[miniA:maxiA]
-                        ps = sp.interp1d(vstack,plus)
-                        plusgrid = ps(vgrid)
-                        largeStackP = np.vstack((largeStackP,plusgrid))
-                        Ldark = dvB*np.abs(darkIndex-i)
-                        Lt = t/snrB[i]
-                        addPoint = np.array([Lt,Ldark])
-                        Larray = np.vstack((Larray,addPoint))
-                        bigStackCount = bigStackCount + 1
-                        # plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
-                    #plt.show(block=False)
-                #negative stack
-                mini = darkIndex - nrangeB - 1
-                maxi = darkIndex - 1
-                minus = nullValue*np.ones(nrange)
-                if (mini < 0):
-                    mini = 0
-                
-                zminB = zsB[mini]
-                zmaxB = zsB[maxi]
-
-                #check if able to stack
-                if ((zmaxB>zminA)&(zmaxB<=zmaxA)):
-                    maxiA = np.size(zsA[zsA<=zmaxB])-1
-                    miniA = maxiA - nrange 
-                    beginning = 1
-                    if (miniA < 0):
-                        miniA = 0
-                    nextent = maxiA-miniA
-                else:
-                    nextent = 0
-                    print "should this error have happened?"
+                if (np.max(sfluxA[miniA:maxiA]) > sigmaT/2):
+                    doubleDark = 0
+                    print "failed to find simultaneous Lya"
+                    print "and Lyb absorption"          
+                    print np.max(sfluxA[miniA:maxiA]),sigmaT
+                    print miniA,darkIndex,maxiA,i
             
-                if (darkIndex <= 0):
-                    nextent = 0
+            if (requireLyab == 0):
+                doubleDark = 1
+            # proceed with stacking if no overlap 
+            # or if overlap is absorbed
+            if doubleDark:
+                # stack in one direction, check for boundaries too
+                if (darkGap >= largeCutoff):
+                    stackCount = stackCount + 1
+                    # OK, so here we probably have to do some thinking
+                    mini = i
+                    maxi = i + nrangeB
+                    plus = nullValue*np.ones(nrange)
+                    if (maxi >= fluxlength):
+                        maxi = (fluxlength - 1)
+                    zminB = zsB[mini]
+                    zmaxB = zsB[maxi]
 
 
-                #if (nextent >= nrange):
-                #    nextent = nrange-1
-                # something somewhat-complicated will happen here
-                if (nextent > 0):
-                    condition1 = (zcut>0)&(zsB[maxi]>=zcut)
-                    condition2 = (zcut<0)&(zsB[maxi]<=np.abs(zcut))
-                    if (condition1 | condition2):
-                        minus[-1*nextent::] = fluxA[miniA:maxiA]
-                        ms = sp.interp1d(vstack,minus)
-                        minusgrid = ms(vgrid)
-                        largeStackM = np.vstack((largeStackM,minusgrid))
-                        Ldark = dvB*nextent
-                        Lt = t/snrB[i]
+                    # check if able to stack
+                    if ((zminB>=zminA)&(zminB<zmaxA)):
+                        miniA = np.size(zsA[zsA<=zminB])-1
+                        maxiA = miniA + nrange 
+                        beginning = 0
+                        if (maxiA >= np.size(fluxA)):
+                            maxiA = np.size(fluxA) - 1
+                        nextent = maxiA-miniA
+                 
+                    else:
+                        nextent = 0
+                        print "should this error have happened?"
+                
+
+                    # if (nextent>=nrange):
+                    #    nextent = nrange-1
+                    if (nextent > 0):
+                        condition1 = (zcut>0)&(zsB[mini]>=zcut)
+                        condition2 = (zcut<0)&(zsB[mini]<=np.abs(zcut))
+                    
+                        if (condition1 | condition2):
+                            plus[0:nextent] = fluxA[miniA:maxiA]
+                            ps = sp.interp1d(vstack,plus)
+                            plusgrid = ps(vgrid)
+                            largeStackP = np.vstack((largeStackP,plusgrid))
+                            Ldark = dvB*np.abs(darkIndex-i)
+                            Lt = t/snrB[i]
+                            addPoint = np.array([Lt,Ldark])
+                            Larray = np.vstack((Larray,addPoint))
+                            bigStackCount = bigStackCount + 1
+                            # plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]))
+                            # plt.show(block=False)
+                            # negative stack
+                    mini = darkIndex - nrangeB - 1
+                    maxi = darkIndex - 1
+                    minus = nullValue*np.ones(nrange)
+                    if (mini < 0):
+                        mini = 0
+                
+                    zminB = zsB[mini]
+                    zmaxB = zsB[maxi]
+
+                    # check if able to stack
+                    if ((zmaxB>zminA)&(zmaxB<=zmaxA)):
+                        maxiA = np.size(zsA[zsA<=zmaxB])-1
+                        miniA = maxiA - nrange 
+                        beginning = 1
+                        if (miniA < 0):
+                            miniA = 0
+                        nextent = maxiA-miniA
+                    else:
+                        nextent = 0
+                        print "should this error have happened?"
+            
+                    if (darkIndex <= 0):
+                        nextent = 0
+
+
+                    # if (nextent >= nrange):
+                    #    nextent = nrange-1
+                    # something somewhat-complicated will happen here
+                    if (nextent > 0):
+                        condition1 = (zcut>0)&(zsB[maxi]>=zcut)
+                        condition2 = (zcut<0)&(zsB[maxi]<=np.abs(zcut))
+                        if (condition1 | condition2):
+                            minus[-1*nextent::] = fluxA[miniA:maxiA]
+                            ms = sp.interp1d(vstack,minus)
+                            minusgrid = ms(vgrid)
+                            largeStackM = np.vstack((largeStackM,minusgrid))
+                            Ldark = dvB*nextent
+                            Lt = t/snrB[i]
                         
                         
-                        # plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
-                    #plt.show(block=False)
+                            # plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]))
+                            # plt.show(block=False)
                     
                 
-            if ((darkGap < smallCutoff) & (darkGap >= superSmallCutoff)):
-                stackCount = stackCount + 1
-                #contributes to small stack
-                #need to stack at both edges
+                if ((darkGap < smallCutoff) & (darkGap >= superSmallCutoff)):
+                    stackCount = stackCount + 1
+                    # contributes to small stack
+                    # need to stack at both edges
 
-                #positive stack
-                mini = i
-                maxi = i + nrangeB
-                plus = nullValue*np.ones(nrange)
-                if (maxi >= fluxlength):
-                    maxi = (fluxlength - 1)
-                zminB = zsB[mini]
-                zmaxB = zsB[maxi]
+                    # positive stack
+                    mini = i
+                    maxi = i + nrangeB
+                    plus = nullValue*np.ones(nrange)
+                    if (maxi >= fluxlength):
+                        maxi = (fluxlength - 1)
+                    zminB = zsB[mini]
+                    zmaxB = zsB[maxi]
                 
-                # check if able to stack
-                if ((zminB>=zminA)&(zminB<zmaxA)):
-                    miniA = np.size(zsA[zsA<=zminB])-1
-                    maxiA = miniA + nrange 
-                    beginning = 1
-                    if (maxiA >= np.size(fluxA)):
-                        maxiA = np.size(fluxA) - 1
-                    nextent = maxiA-miniA
-                else: 
-                    nextent = 0
-                    print "should this error have happened?"                        
-                #if (nextent >= nrange):
-                #    nextent = nrange - 1
-                if (nextent > 0):
-                    condition1 = (zcut>0)&(zsB[mini]>=zcut)
-                    condition2 = (zcut<0)&(zsB[mini]<=np.abs(zcut))
-                    if (condition1 | condition2):
-                        plus[0:nextent] = fluxA[miniA:maxiA]
-                        ps = sp.interp1d(vstack,plus)
-                        plusgrid = ps(vgrid)
-                        smallStackP = np.vstack((smallStackP,plusgrid))
-                        Ldark = dvB*np.abs(darkIndex-i)
-                        Lt = t/snrB[i]
-                        addPoint = np.array([Lt,Ldark])
-                        Larray = np.vstack((Larray,addPoint))
-                        #plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
-                    #plt.show(block=False)
+                    # check if able to stack
+                    if ((zminB>=zminA)&(zminB<zmaxA)):
+                        miniA = np.size(zsA[zsA<=zminB])-1
+                        maxiA = miniA + nrange 
+                        beginning = 1
+                        if (maxiA >= np.size(fluxA)):
+                            maxiA = np.size(fluxA) - 1
+                        nextent = maxiA-miniA
+                    else: 
+                        nextent = 0
+                        print "should this error have happened?"                        
+                    # if (nextent >= nrange):
+                    #    nextent = nrange - 1
+                    if (nextent > 0):
+                        condition1 = (zcut>0)&(zsB[mini]>=zcut)
+                        condition2 = (zcut<0)&(zsB[mini]<=np.abs(zcut))
+                        if (condition1 | condition2):
+                            plus[0:nextent] = fluxA[miniA:maxiA]
+                            ps = sp.interp1d(vstack,plus)
+                            plusgrid = ps(vgrid)
+                            smallStackP = np.vstack((smallStackP,plusgrid))
+                            Ldark = dvB*np.abs(darkIndex-i)
+                            Lt = t/snrB[i]
+                            addPoint = np.array([Lt,Ldark])
+                            Larray = np.vstack((Larray,addPoint))
+                            # plt.plot(np.array([vs[mini],vs[mini]]),np.array([0,1]),'--')
+                            # plt.show(block=False)
                     
 
-                #negative stack
-                mini = darkIndex - nrangeB - 1
-                maxi = darkIndex - 1
-                minus = nullValue*np.ones(nrange)
-                if (mini < 0):
-                    mini = 0
+                    # negative stack
+                    mini = darkIndex - nrangeB - 1
+                    maxi = darkIndex - 1
+                    minus = nullValue*np.ones(nrange)
+                    if (mini < 0):
+                        mini = 0
                     
-                zminB = zsB[mini]
-                zmaxB = zsB[maxi]
+                    zminB = zsB[mini]
+                    zmaxB = zsB[maxi]
                 
-                if ((zmaxB>zminA)&(zmaxB<=zmaxA)):
-                    maxiA = np.size(zsA[zsA<=zmaxB])-1
-                    miniA = maxiA - nrange 
-                    beginning = 1
-                    if (miniA < 0):
-                        miniA = 0
-                    nextent = maxiA-miniA
-                else:
-                    nextent = 0
-                    print "should this error have happened?"
+                    if ((zmaxB>zminA)&(zmaxB<=zmaxA)):
+                        maxiA = np.size(zsA[zsA<=zmaxB])-1
+                        miniA = maxiA - nrange 
+                        beginning = 1
+                        if (miniA < 0):
+                            miniA = 0
+                        nextent = maxiA-miniA
+                    else:
+                        nextent = 0
+                        print "should this error have happened?"
 
-                if (darkIndex <= 0):
-                    nextent = 0
+                    if (darkIndex <= 0):
+                        nextent = 0
 
-                
-                #if (nextent >= nrange):
-                #    nextent = nrange - 1
-                if (nextent > 0):
-                    condition1 = (zcut>0)&(zsB[maxi]>=zcut)
-                    condition2 = (zcut<0)&(zsB[maxi]<=np.abs(zcut))
-                    if (condition1 | condition2):
-                        
-                        minus[-1*nextent::] = fluxA[miniA:maxiA]
-                        ms = sp.interp1d(vstack,minus)
-                        minusgrid = ms(vgrid)
-                        smallStackM = np.vstack((smallStackM,minusgrid))
-                        Ldark = dvB*nextent
-                        Lt = t/snrB[i]
-                        
-                        
-                        # plt.plot(np.array([vs[maxi],vs[maxi]]),np.array([0,1]),'--')
-                    #plt.show(block=False)
-                    
-                    
+                    if (nextent > 0):
+                        condition1 = (zcut>0)&(zsB[maxi]>=zcut)
+                        condition2 = (zcut<0)&(zsB[maxi]<=np.abs(zcut))
+                        if (condition1 | condition2):
+                            minus[-1*nextent::] = fluxA[miniA:maxiA]
+                            ms = sp.interp1d(vstack,minus)
+                            minusgrid = ms(vgrid)
+                            smallStackM = np.vstack((smallStackM,minusgrid))
+                            Ldark = dvB*nextent
+                            Lt = t/snrB[i]
+                                                                               
             darkGap = 0
             darkIndex = darkIndexReset
 
-    #plt.axis([np.min(vs),np.max(vs),-0.1,1.2])
-    #plt.show(block=False)
-    #input("Flux and all stacking locations...")
-    #plt.close()
     
     fluxvar = np.var(fluxA)
-    #sigmaT
     print "%s contributed %d stacks..." % (mFilenameA,stackCount)
     print "%s contributed %d large dark gaps..." % (mFilenameA,bigStackCount)
     return largeStackP,largeStackM,smallStackP,smallStackM,meansnrA,Larray,bigStackCount,sigmaT
@@ -1513,11 +1528,11 @@ def fullStack(lmin,lmax,zcut,t,UseLyb):
     #input('do something to continue...')
     plots = 0
     if plots:
-        plt.plot(zcounts[zcounts!=0],wcounts[zcounts!=0],'o')
+        plt.plot(zcounts[zcounts!=0],scounts[zcounts!=0],'o')
         # plt.plot(sindex,scounts,'o')
         plt.xlabel('Spectrum Redshift')
         # plt.ylabel('t$\sigma_{N}$')
-        # plt.ylabel('Number of Contributions to Stack (L>1200km/s)')
+        plt.ylabel('Number of Contributions to Stack (L>1200km/s)')
         plt.ylabel('Weighting of Spectrum')
         plt.show(block=False)
         input("Enter something to continue...")
@@ -1627,7 +1642,7 @@ def StackOneL():
     lmax = 300
     lmin = 1000
     UseLyb = 0
-    zcut = 5.75
+    zcut = 5
     t = 3
     vs,large,small,largeVar,smallVar = fullStack(lmin,lmax,zcut,t,UseLyb)
     
@@ -1774,7 +1789,7 @@ def stepByStep():
 if __name__ == "__main__":
     
     # stepByStep()
-    # StackOneL()
+    StackOneL()
     # FluxVarEstimate()
     # findWeightings()
-    gridPlot()
+    # gridPlot()
